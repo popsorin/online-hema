@@ -7,20 +7,12 @@ import (
 	"testing"
 
 	"hema-lessons/internal/models"
-	"hema-lessons/internal/repository"
 	"hema-lessons/internal/testutil"
 )
 
 func TestChapterHandler_ListByFightingBook(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	testutil.SeedChapters(t, db, bookIDs)
-
-	repo := repository.NewChapterRepository(db)
-	handler := NewChapterHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewChapterHandler(s)
 
 	tests := []struct {
 		name               string
@@ -94,15 +86,8 @@ func TestChapterHandler_ListByFightingBook(t *testing.T) {
 }
 
 func TestChapterHandler_ListByFightingBook_VerifyOrdering(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	testutil.SeedChapters(t, db, bookIDs)
-
-	repo := repository.NewChapterRepository(db)
-	handler := NewChapterHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewChapterHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/fighting-books/1/chapters", nil)
 	w := httptest.NewRecorder()
@@ -127,15 +112,8 @@ func TestChapterHandler_ListByFightingBook_VerifyOrdering(t *testing.T) {
 }
 
 func TestChapterHandler_ListByFightingBook_VerifyFields(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	testutil.SeedChapters(t, db, bookIDs)
-
-	repo := repository.NewChapterRepository(db)
-	handler := NewChapterHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewChapterHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/fighting-books/1/chapters", nil)
 	w := httptest.NewRecorder()
@@ -155,7 +133,7 @@ func TestChapterHandler_ListByFightingBook_VerifyFields(t *testing.T) {
 		t.Fatal("expected at least one chapter")
 	}
 
-	requiredFields := []string{"id", "fighting_book_id", "chapter_number", "title", "description", "created_at", "updated_at"}
+	requiredFields := []string{"id", "fighting_book_id", "chapter_number", "title", "description"}
 	for _, field := range requiredFields {
 		if _, exists := chapters[0][field]; !exists {
 			t.Errorf("expected field %s to exist in response", field)
@@ -164,14 +142,8 @@ func TestChapterHandler_ListByFightingBook_VerifyFields(t *testing.T) {
 }
 
 func TestChapterHandler_ListByFightingBook_EmptyResult(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	testutil.SeedFightingBooks(t, db, masterIDs)
-
-	repo := repository.NewChapterRepository(db)
-	handler := NewChapterHandler(repo)
+	s := testutil.NewStoreWithMastersAndBooks()
+	handler := NewChapterHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/fighting-books/1/chapters", nil)
 	w := httptest.NewRecorder()

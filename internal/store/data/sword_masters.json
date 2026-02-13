@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Johannes Liechtenauer",
+    "bio": "German fencing master, founder of the Liechtenauer tradition of German fencing",
+    "birth_year": 1300,
+    "death_year": 1389
+  },
+  {
+    "id": 2,
+    "name": "Fiore dei Liberi",
+    "bio": "Italian fencing master who wrote one of the most important medieval fighting treatises",
+    "birth_year": 1350,
+    "death_year": 1420
+  },
+  {
+    "id": 3,
+    "name": "Sigmund Ringeck",
+    "bio": "German fencing master and student of Johannes Liechtenauer",
+    "birth_year": 1400,
+    "death_year": 1470
+  }
+]

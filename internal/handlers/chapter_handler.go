@@ -7,15 +7,15 @@ import (
 	"strconv"
 	"strings"
 
-	"hema-lessons/internal/repository"
+	"hema-lessons/internal/store"
 )
 
 type ChapterHandler struct {
-	repo *repository.ChapterRepository
+	store *store.Store
 }
 
-func NewChapterHandler(repo *repository.ChapterRepository) *ChapterHandler {
-	return &ChapterHandler{repo: repo}
+func NewChapterHandler(s *store.Store) *ChapterHandler {
+	return &ChapterHandler{store: s}
 }
 
 func (h *ChapterHandler) ListByFightingBook(w http.ResponseWriter, r *http.Request) {
@@ -47,24 +47,12 @@ func (h *ChapterHandler) ListByFightingBook(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	exists, err := h.repo.FightingBookExists(fightingBookID)
-	if err != nil {
-		log.Printf("failed to check fighting book existence: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	if !exists {
+	if !h.store.FightingBookExists(fightingBookID) {
 		http.Error(w, "fighting book not found", http.StatusNotFound)
 		return
 	}
 
-	chapters, err := h.repo.ListByFightingBookID(fightingBookID)
-	if err != nil {
-		log.Printf("failed to list chapters: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
+	chapters := h.store.ListChaptersByBookID(fightingBookID)
 
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(chapters); err != nil {

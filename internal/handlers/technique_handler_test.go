@@ -7,21 +7,12 @@ import (
 	"testing"
 
 	"hema-lessons/internal/models"
-	"hema-lessons/internal/repository"
 	"hema-lessons/internal/testutil"
 )
 
 func TestTechniqueHandler_ListByChapter(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	chapterIDs := testutil.SeedChapters(t, db, bookIDs)
-	testutil.SeedTechniques(t, db, chapterIDs)
-
-	repo := repository.NewTechniqueRepository(db)
-	handler := NewTechniqueHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewTechniqueHandler(s)
 
 	tests := []struct {
 		name               string
@@ -95,16 +86,8 @@ func TestTechniqueHandler_ListByChapter(t *testing.T) {
 }
 
 func TestTechniqueHandler_ListByChapter_VerifyOrdering(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	chapterIDs := testutil.SeedChapters(t, db, bookIDs)
-	testutil.SeedTechniques(t, db, chapterIDs)
-
-	repo := repository.NewTechniqueRepository(db)
-	handler := NewTechniqueHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewTechniqueHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/chapters/1/techniques", nil)
 	w := httptest.NewRecorder()
@@ -129,16 +112,8 @@ func TestTechniqueHandler_ListByChapter_VerifyOrdering(t *testing.T) {
 }
 
 func TestTechniqueHandler_ListByChapter_VerifyFields(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	chapterIDs := testutil.SeedChapters(t, db, bookIDs)
-	testutil.SeedTechniques(t, db, chapterIDs)
-
-	repo := repository.NewTechniqueRepository(db)
-	handler := NewTechniqueHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewTechniqueHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/chapters/1/techniques", nil)
 	w := httptest.NewRecorder()
@@ -158,7 +133,7 @@ func TestTechniqueHandler_ListByChapter_VerifyFields(t *testing.T) {
 		t.Fatal("expected at least one technique")
 	}
 
-	requiredFields := []string{"id", "chapter_id", "name", "description", "instructions", "order_in_chapter", "created_at", "updated_at"}
+	requiredFields := []string{"id", "chapter_id", "name", "description", "instructions", "order_in_chapter"}
 	for _, field := range requiredFields {
 		if _, exists := techniques[0][field]; !exists {
 			t.Errorf("expected field %s to exist in response", field)
@@ -167,15 +142,8 @@ func TestTechniqueHandler_ListByChapter_VerifyFields(t *testing.T) {
 }
 
 func TestTechniqueHandler_ListByChapter_EmptyResult(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-	testutil.SeedChapters(t, db, bookIDs)
-
-	repo := repository.NewTechniqueRepository(db)
-	handler := NewTechniqueHandler(repo)
+	s := testutil.NewStoreWithMastersBooksAndChapters()
+	handler := NewTechniqueHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/chapters/1/techniques", nil)
 	w := httptest.NewRecorder()

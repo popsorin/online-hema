@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "sword_master_id": 1,
+    "title": "Zettel",
+    "description": "A mnemonic poem describing the core principles of Liechtenauer's fighting system",
+    "publication_year": 1389
+  },
+  {
+    "id": 2,
+    "sword_master_id": 2,
+    "title": "Fior di Battaglia",
+    "description": "The Flower of Battle - a comprehensive medieval combat manual covering armed and unarmed combat",
+    "publication_year": 1409
+  },
+  {
+    "id": 3,
+    "sword_master_id": 3,
+    "title": "Fechtbuch",
+    "description": "A detailed commentary on Liechtenauer's teachings with practical applications",
+    "publication_year": 1440
+  }
+]

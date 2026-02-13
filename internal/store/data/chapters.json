@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "fighting_book_id": 2,
+    "chapter_number": 1,
+    "title": "Wrestling",
+    "description": "Techniques for unarmed combat and grappling"
+  },
+  {
+    "id": 2,
+    "fighting_book_id": 2,
+    "chapter_number": 2,
+    "title": "Dagger Combat",
+    "description": "Fighting with the dagger in various situations"
+  },
+  {
+    "id": 3,
+    "fighting_book_id": 2,
+    "chapter_number": 3,
+    "title": "Longsword",
+    "description": "The art of fighting with the longsword"
+  },
+  {
+    "id": 4,
+    "fighting_book_id": 2,
+    "chapter_number": 4,
+    "title": "Poleaxe",
+    "description": "Combat techniques with the poleaxe"
+  }
+]

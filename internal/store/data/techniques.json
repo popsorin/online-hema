@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "chapter_id": 3,
+    "name": "First Guard - Posta di Donna",
+    "description": "The Woman's Guard - a high guard position",
+    "instructions": "Hold the sword with the hilt near your right shoulder, point aimed at the opponent's face",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 2,
+    "chapter_id": 3,
+    "name": "Zornhau",
+    "description": "The Wrath Strike - a powerful diagonal cut",
+    "instructions": "Strike diagonally from your right shoulder to the opponent's left side with full commitment",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 3,
+    "chapter_id": 3,
+    "name": "Krumphau",
+    "description": "The Crooked Strike - an off-line attack",
+    "instructions": "Step offline and strike with the false edge, hands crossed",
+    "order_in_chapter": 3
+  }
+]

@@ -13,7 +13,6 @@ FROM alpine:3.20
 RUN adduser -D -g '' appuser
 WORKDIR /app
 COPY --from=builder /app/hema-api /app/hema-api
-COPY migrations/ /app/migrations/
 
 USER appuser
 EXPOSE 8080

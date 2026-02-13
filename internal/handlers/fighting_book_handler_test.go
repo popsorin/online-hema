@@ -8,19 +8,13 @@ import (
 	"testing"
 
 	"hema-lessons/internal/pagination"
-	"hema-lessons/internal/repository"
+	"hema-lessons/internal/store"
 	"hema-lessons/internal/testutil"
 )
 
 func TestFightingBookHandler_List(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	testutil.SeedFightingBooks(t, db, masterIDs)
-
-	repo := repository.NewFightingBookRepository(db)
-	handler := NewFightingBookHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewFightingBookHandler(s)
 
 	tests := []struct {
 		name               string
@@ -131,7 +125,7 @@ func TestFightingBookHandler_List(t *testing.T) {
 				t.Fatalf("expected data to be an array")
 			}
 
-			if tt.expectedDataCount == 0 && response.Data == nil {
+			if tt.expectedDataCount == 0 && (response.Data == nil || len(data) == 0) {
 				// This is fine for empty results
 				return
 			}
@@ -158,11 +152,8 @@ func TestFightingBookHandler_List(t *testing.T) {
 }
 
 func TestFightingBookHandler_List_EmptyDatabase(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	repo := repository.NewFightingBookRepository(db)
-	handler := NewFightingBookHandler(repo)
+	s := testutil.NewEmptyStore()
+	handler := NewFightingBookHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/fighting-books", nil)
 	w := httptest.NewRecorder()
@@ -188,14 +179,8 @@ func TestFightingBookHandler_List_EmptyDatabase(t *testing.T) {
 }
 
 func TestFightingBookHandler_List_VerifyOrdering(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	testutil.SeedFightingBooks(t, db, masterIDs)
-
-	repo := repository.NewFightingBookRepository(db)
-	handler := NewFightingBookHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewFightingBookHandler(s)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/fighting-books", nil)
 	w := httptest.NewRecorder()
@@ -226,14 +211,8 @@ func TestFightingBookHandler_List_VerifyOrdering(t *testing.T) {
 }
 
 func TestFightingBookHandler_Get(t *testing.T) {
-	db := testutil.SetupTestDB(t)
-	defer testutil.TeardownTestDB(t, db)
-
-	masterIDs := testutil.SeedSwordMasters(t, db)
-	bookIDs := testutil.SeedFightingBooks(t, db, masterIDs)
-
-	repo := repository.NewFightingBookRepository(db)
-	handler := NewFightingBookHandler(repo)
+	s := testutil.NewTestStore()
+	handler := NewFightingBookHandler(s)
 
 	tests := []struct {
 		name               string
@@ -244,14 +223,14 @@ func TestFightingBookHandler_Get(t *testing.T) {
 	}{
 		{
 			name:               "existing book - first book",
-			bookID:             bookIDs[0],
+			bookID:             1,
 			expectedStatusCode: http.StatusOK,
 			expectBook:         true,
 			expectedTitle:      "Book A",
 		},
 		{
 			name:               "existing book - last book",
-			bookID:             bookIDs[len(bookIDs)-1],
+			bookID:             5,
 			expectedStatusCode: http.StatusOK,
 			expectBook:         true,
 			expectedTitle:      "Book E",
@@ -286,7 +265,7 @@ func TestFightingBookHandler_Get(t *testing.T) {
 				return
 			}
 
-			var book repository.FightingBookWithMaster
+			var book store.FightingBookWithMaster
 			if err := json.NewDecoder(w.Body).Decode(&book); err != nil {
 				t.Fatalf("failed to decode response: %v", err)
 			}

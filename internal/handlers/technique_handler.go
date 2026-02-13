@@ -7,15 +7,15 @@ import (
 	"strconv"
 	"strings"
 
-	"hema-lessons/internal/repository"
+	"hema-lessons/internal/store"
 )
 
 type TechniqueHandler struct {
-	repo *repository.TechniqueRepository
+	store *store.Store
 }
 
-func NewTechniqueHandler(repo *repository.TechniqueRepository) *TechniqueHandler {
-	return &TechniqueHandler{repo: repo}
+func NewTechniqueHandler(s *store.Store) *TechniqueHandler {
+	return &TechniqueHandler{store: s}
 }
 
 func (h *TechniqueHandler) ListByChapter(w http.ResponseWriter, r *http.Request) {
@@ -47,24 +47,12 @@ func (h *TechniqueHandler) ListByChapter(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	exists, err := h.repo.ChapterExists(chapterID)
-	if err != nil {
-		log.Printf("failed to check chapter existence: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	if !exists {
+	if !h.store.ChapterExists(chapterID) {
 		http.Error(w, "chapter not found", http.StatusNotFound)
 		return
 	}
 
-	techniques, err := h.repo.ListByChapterID(chapterID)
-	if err != nil {
-		log.Printf("failed to list techniques: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
+	techniques := h.store.ListTechniquesByChapterID(chapterID)
 
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(techniques); err != nil {

@@ -6,46 +6,7 @@ services:
       # Server Configuration
       SERVER_ADDR: ${SERVER_ADDR:-:8080}
       SERVER_READ_HEADER_TIMEOUT: ${SERVER_READ_HEADER_TIMEOUT:-5}
-      # Database Configuration
-      DATABASE_HOST: "db"
-      DATABASE_PORT: ${DATABASE_PORT:-5432}
-      DATABASE_USER: ${DATABASE_USER:-hema}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD?Database password must be set}
-      DATABASE_DBNAME: ${DATABASE_DBNAME:-hema_lessons}
-      DATABASE_SSLMODE: ${DATABASE_SSLMODE:-disable}
-      # Redis Configuration
-      REDIS_URL: "redis://cache:6379/0"
       # Application Configuration
       APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
     ports:
       - "8080:8080"
-    depends_on:
-      - db
-      - cache
-
-  db:
-    image: postgres:16-alpine
-    environment:
-      # Map our environment variables to PostgreSQL's expected names
-      POSTGRES_USER: ${DATABASE_USER:-hema}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD?Database password must be set}
-      POSTGRES_DB: ${DATABASE_DBNAME:-hema_lessons}
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-  cache:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-volumes:
-  db_data:
-  redis_data:
-
-networks:
-  default:
-    name: hema-lessons-network

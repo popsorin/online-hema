@@ -7,28 +7,13 @@ import (
 )
 
 type Config struct {
-	Server   ServerConfig
-	Database DatabaseConfig
-	Redis    RedisConfig
-	App      AppConfig
+	Server ServerConfig
+	App    AppConfig
 }
 
 type ServerConfig struct {
 	Addr              string
 	ReadHeaderTimeout int
-}
-
-type DatabaseConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DBName   string
-	SSLMode  string
-}
-
-type RedisConfig struct {
-	URL string
 }
 
 type AppConfig struct {
@@ -40,17 +25,6 @@ func Load() (*Config, error) {
 		Server: ServerConfig{
 			Addr:              getEnv("SERVER_ADDR", ":8080"),
 			ReadHeaderTimeout: getEnvAsInt("SERVER_READ_HEADER_TIMEOUT", 5),
-		},
-		Database: DatabaseConfig{
-			Host:     getEnv("DATABASE_HOST", "localhost"),
-			Port:     getEnv("DATABASE_PORT", "5432"),
-			User:     getEnv("DATABASE_USER", "postgres"),
-			Password: getEnv("DATABASE_PASSWORD", "postgres"),
-			DBName:   getEnv("DATABASE_DBNAME", "hema_lessons"),
-			SSLMode:  getEnv("DATABASE_SSLMODE", "disable"),
-		},
-		Redis: RedisConfig{
-			URL: getEnv("REDIS_URL", "redis://localhost:6379/0"),
 		},
 		App: AppConfig{
 			Environment: getEnv("APP_ENVIRONMENT", "development"),
@@ -68,15 +42,6 @@ func validate(config *Config) error {
 	if config.Server.Addr == "" {
 		return fmt.Errorf("server address is required")
 	}
-	if config.Database.Host == "" {
-		return fmt.Errorf("database host is required")
-	}
-	if config.Database.User == "" {
-		return fmt.Errorf("database user is required")
-	}
-	if config.Database.DBName == "" {
-		return fmt.Errorf("database name is required")
-	}
 	return nil
 }
 
@@ -86,18 +51,6 @@ func (c *Config) IsDevelopment() bool {
 
 func (c *Config) IsProduction() bool {
 	return c.App.Environment == "production"
-}
-
-func (c *Config) GetDSN() string {
-	return fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		c.Database.Host,
-		c.Database.Port,
-		c.Database.User,
-		c.Database.Password,
-		c.Database.DBName,
-		c.Database.SSLMode,
-	)
 }
 
 func getEnv(key, defaultValue string) string {

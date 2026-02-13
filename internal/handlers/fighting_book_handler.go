@@ -8,26 +8,21 @@ import (
 	"strings"
 
 	"hema-lessons/internal/pagination"
-	"hema-lessons/internal/repository"
+	"hema-lessons/internal/store"
 )
 
 type FightingBookHandler struct {
-	repo *repository.FightingBookRepository
+	store *store.Store
 }
 
-func NewFightingBookHandler(repo *repository.FightingBookRepository) *FightingBookHandler {
-	return &FightingBookHandler{repo: repo}
+func NewFightingBookHandler(s *store.Store) *FightingBookHandler {
+	return &FightingBookHandler{store: s}
 }
 
 func (h *FightingBookHandler) List(w http.ResponseWriter, r *http.Request) {
 	params := pagination.ParseParams(r)
 
-	books, totalCount, err := h.repo.List(params)
-	if err != nil {
-		log.Printf("failed to list fighting books: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
+	books, totalCount := h.store.ListFightingBooks(params)
 
 	response := pagination.NewResponse(books, params, totalCount)
 
@@ -64,13 +59,7 @@ func (h *FightingBookHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	book, err := h.repo.GetByID(id)
-	if err != nil {
-		log.Printf("failed to get fighting book: %v", err)
-		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
-	}
-
+	book := h.store.GetFightingBookByID(id)
 	if book == nil {
 		http.Error(w, "fighting book not found", http.StatusNotFound)
 		return
