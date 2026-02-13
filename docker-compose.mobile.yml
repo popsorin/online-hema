@@ -1,0 +1,43 @@
+# Docker Compose for React Native Mobile CI/Testing
+# 
+# NOTE: Development with React Native CLI requires Android Studio/Xcode
+# and should be done locally, not in Docker.
+#
+# Usage:
+#   Tests:        docker compose -f docker-compose.mobile.yml run mobile-test
+#   Lint/CI:      docker compose -f docker-compose.mobile.yml run mobile-ci
+#
+# For development, run locally:
+#   cd mobile
+#   npm install
+#   npx react-native run-android  # Requires Android emulator
+
+services:
+  # Test runner
+  mobile-test:
+    build:
+      context: ./mobile
+      target: test
+    volumes:
+      - ./mobile:/app
+      - mobile_node_modules:/app/node_modules
+    environment:
+      CI: "true"
+    profiles:
+      - test
+
+  # CI checks (lint, typecheck)
+  mobile-ci:
+    build:
+      context: ./mobile
+      target: ci
+    volumes:
+      - ./mobile:/app
+      - mobile_node_modules:/app/node_modules
+    environment:
+      CI: "true"
+    profiles:
+      - ci
+
+volumes:
+  mobile_node_modules:

@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+
+# Dependencies (will be installed in container)
+node_modules
+
+# Build outputs
+build
+dist
+bundle
+*.jsbundle
+
+# iOS specific
+ios/Pods
+ios/build
+*.xcworkspace
+*.xcodeproj
+
+# Android specific
+android/build
+android/.gradle
+android/app/build
+*.apk
+*.aab
+
+# Test artifacts
+coverage
+__snapshots__
+
+# IDE and editor files
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files (use Docker env vars instead)
+.env
+.env.*
+
+# Documentation
+*.md
+docs/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
