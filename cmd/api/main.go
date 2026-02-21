@@ -2,13 +2,17 @@ package main
 
 import (
 	"encoding/json"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
+	"github.com/getsentry/sentry-go"
+
 	"hema-lessons/internal/config"
 	"hema-lessons/internal/handlers"
+	"hema-lessons/internal/middleware"
 	"hema-lessons/internal/store"
 )
 
@@ -20,18 +24,46 @@ type healthResponse struct {
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
-		log.Fatalf("failed to load configuration: %v", err)
+		slog.Error("failed to load configuration", "error", err)
+		os.Exit(1)
 	}
 
-	if cfg.IsDevelopment() {
-		log.Printf("starting in development mode")
+	// Set up structured logging - JSON in production, text in development
+	var logHandler slog.Handler
+	if cfg.IsProduction() {
+		logHandler = slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+			Level: slog.LevelInfo,
+		})
+	} else {
+		logHandler = slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+			Level: slog.LevelDebug,
+		})
+	}
+	slog.SetDefault(slog.New(logHandler))
+
+	slog.Info("starting application", "environment", cfg.App.Environment)
+
+	// Initialize Sentry for error tracking
+	if cfg.App.SentryDSN != "" {
+		err := sentry.Init(sentry.ClientOptions{
+			Dsn:              cfg.App.SentryDSN,
+			Environment:      cfg.App.Environment,
+			TracesSampleRate: 0.1, // 10% of transactions for performance monitoring
+		})
+		if err != nil {
+			slog.Error("failed to initialize Sentry", "error", err)
+		} else {
+			slog.Info("sentry initialized")
+			defer sentry.Flush(2 * time.Second)
+		}
 	}
 
 	dataStore, err := store.New()
 	if err != nil {
-		log.Fatalf("failed to load data store: %v", err)
+		slog.Error("failed to load data store", "error", err)
+		os.Exit(1)
 	}
-	log.Println("data store loaded")
+	slog.Info("data store loaded")
 
 	fightingBookHandler := handlers.NewFightingBookHandler(dataStore)
 	chapterHandler := handlers.NewChapterHandler(dataStore)
@@ -78,15 +110,19 @@ func main() {
 		http.NotFound(w, r)
 	})
 
+	// Wrap handler with middleware (order: Recovery -> RequestLogger -> mux)
+	httpHandler := middleware.Recovery(middleware.RequestLogger(mux))
+
 	server := &http.Server{
 		Addr:              cfg.Server.Addr,
-		Handler:           mux,
+		Handler:           httpHandler,
 		ReadHeaderTimeout: time.Duration(cfg.Server.ReadHeaderTimeout) * time.Second,
 	}
 
-	log.Printf("hema api listening on %s", cfg.Server.Addr)
+	slog.Info("hema api listening", "addr", cfg.Server.Addr)
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Fatalf("server failed: %v", err)
+		slog.Error("server failed", "error", err)
+		os.Exit(1)
 	}
 }
 

@@ -18,6 +18,7 @@ type ServerConfig struct {
 
 type AppConfig struct {
 	Environment string
+	SentryDSN   string
 }
 
 func Load() (*Config, error) {
@@ -28,6 +29,7 @@ func Load() (*Config, error) {
 		},
 		App: AppConfig{
 			Environment: getEnv("APP_ENVIRONMENT", "development"),
+			SentryDSN:   getEnv("SENTRY_DSN", ""),
 		},
 	}
 

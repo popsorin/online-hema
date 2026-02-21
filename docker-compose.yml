@@ -8,5 +8,7 @@ services:
       SERVER_READ_HEADER_TIMEOUT: ${SERVER_READ_HEADER_TIMEOUT:-5}
       # Application Configuration
       APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
+      # Sentry Configuration (optional)
+      SENTRY_DSN: ${SENTRY_DSN:-}
     ports:
       - "8080:8080"
