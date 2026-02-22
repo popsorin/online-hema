@@ -28,8 +28,8 @@ const getApiUrl = (): string => {
     return 'http://10.0.2.2:8080'; // Default for Android emulator
   }
   
-  // Production API URL - should be configured at build time
-  return 'https://api.hema-lessons.com';
+  // Production API URL
+  return 'https://hema-lessons-api-564075903124.us-east1.run.app';
 };
 
 const config: Config = {

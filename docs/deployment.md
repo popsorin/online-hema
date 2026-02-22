@@ -97,7 +97,7 @@ Your API will be available at: `https://hema-lessons-api-<hash>.run.app`
 3. Set the Sentry DSN as an environment variable on Cloud Run:
    ```bash
    gcloud run services update hema-lessons-api \
-     --region us-central1 \
+     --region us-east1 \
      --update-env-vars SENTRY_DSN=https://your-key@sentry.io/project-id
    ```
 
