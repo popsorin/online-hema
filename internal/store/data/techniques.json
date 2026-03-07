@@ -1,26 +1,882 @@
 [
   {
     "id": 1,
-    "chapter_id": 3,
-    "name": "First Guard - Posta di Donna",
-    "description": "The Woman's Guard - a high guard position",
-    "instructions": "Hold the sword with the hilt near your right shoulder, point aimed at the opponent's face",
+    "chapter_id": 1,
+    "name": "First Remedy Master of Abrazare",
+    "description": "The foundational wrestling master position, establishing the defense against grappling attacks",
+    "instructions": "As the opponent reaches to grab you, step offline with your left foot and seize their right arm at the elbow with your left hand while pushing their chin or face with your right hand",
     "order_in_chapter": 1
   },
   {
     "id": 2,
-    "chapter_id": 3,
-    "name": "Zornhau",
-    "description": "The Wrath Strike - a powerful diagonal cut",
-    "instructions": "Strike diagonally from your right shoulder to the opponent's left side with full commitment",
+    "chapter_id": 1,
+    "name": "Ligadura Soprana (Upper Lock)",
+    "description": "An arm lock that forces the opponent's arm upward, controlling them through pain compliance",
+    "instructions": "From a grip on the opponent's right arm, thread your right arm under their elbow and lever their forearm upward while pressing down on their upper arm with your left hand",
     "order_in_chapter": 2
   },
   {
     "id": 3,
-    "chapter_id": 3,
-    "name": "Krumphau",
-    "description": "The Crooked Strike - an off-line attack",
-    "instructions": "Step offline and strike with the false edge, hands crossed",
+    "chapter_id": 1,
+    "name": "Ligadura Mezana (Middle Lock)",
+    "description": "A mid-level arm lock that controls the opponent by bending their arm across your body",
+    "instructions": "Capture the opponent's right wrist with your left hand and pass your right arm over their arm at the elbow, pressing down to lock the joint while turning your body to the left",
     "order_in_chapter": 3
+  },
+  {
+    "id": 4,
+    "chapter_id": 1,
+    "name": "Ligadura Sottana (Lower Lock)",
+    "description": "A lower arm lock that takes the opponent to the ground by twisting their arm downward",
+    "instructions": "Seize the opponent's right wrist with both hands, step back with your right foot and twist their arm downward and outward, forcing them to the ground",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 5,
+    "chapter_id": 1,
+    "name": "Presa di Petto (Chest Grip)",
+    "description": "A wrestling grip targeting the opponent's chest to set up throws",
+    "instructions": "Close distance and grip the opponent's clothing or armor at the chest with both hands, pulling them toward you while stepping to the side to off-balance them for a throw",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 6,
+    "chapter_id": 1,
+    "name": "Volta Stabile (Stable Turn)",
+    "description": "A turning throw executed from a stable base, using the opponent's momentum against them",
+    "instructions": "From a clinch, pivot on your front foot and turn your hips sharply, using the rotation to throw the opponent over your hip while maintaining a low, stable stance",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 7,
+    "chapter_id": 2,
+    "name": "First Remedy Master of Dagger",
+    "description": "Defense against a forehand dagger thrust, the most common attack",
+    "instructions": "As the attacker thrusts with a forehand grip, step offline to the left with your left foot and intercept their wrist with your left hand, crossing your right hand over to grab their blade hand and strip the weapon",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 8,
+    "chapter_id": 2,
+    "name": "Second Remedy Master of Dagger",
+    "description": "Defense against a backhand dagger attack, intercepting the arm from the outside",
+    "instructions": "Against a backhand slash, step to the right with your right foot and catch the attacker's forearm from the outside with your right hand, then wrap your left arm around their elbow to control the weapon arm",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 9,
+    "chapter_id": 2,
+    "name": "Third Remedy Master of Dagger",
+    "description": "Defense against an overhand dagger strike coming from above",
+    "instructions": "As the attacker strikes downward, raise both arms to intercept their forearm with crossed wrists above your head, then immediately counter-grip their wrist and step in to apply a lock or disarm",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 10,
+    "chapter_id": 2,
+    "name": "Fourth Remedy Master of Dagger",
+    "description": "Defense against a reverse-grip dagger attack using leverage against the thumb",
+    "instructions": "Intercept the attacker's weapon arm at the wrist with both hands and twist sharply against their thumb, breaking their grip while stepping offline to control the angle",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 11,
+    "chapter_id": 2,
+    "name": "Fifth Remedy Master of Dagger",
+    "description": "A universal defense adaptable to multiple angles of dagger attack",
+    "instructions": "Adopt a low stance with arms forward. Regardless of the attack angle, step diagonally forward and use the near hand to parry while the far hand strikes the attacker's face or throat, then transition to a disarm",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 12,
+    "chapter_id": 2,
+    "name": "Tor di Daga (Dagger Disarm)",
+    "description": "A twisting disarm that strips the dagger from the opponent's grip",
+    "instructions": "After intercepting the attacker's weapon hand, grip the dagger blade with your left hand (protected by gloves) and the attacker's wrist with your right, then rotate the blade sharply against their thumb to wrench it free",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 13,
+    "chapter_id": 2,
+    "name": "Mezana Porta di Ferro con Daga (Middle Iron Gate with Dagger)",
+    "description": "A defensive guard position with the dagger held low, inviting attack while preparing a counter",
+    "instructions": "Hold the dagger in a reverse grip at your right hip with the point aimed downward and slightly forward. Keep your left hand raised and ready to intercept. This guard invites a high attack that you can counter from below",
+    "order_in_chapter": 7
+  },
+  {
+    "id": 14,
+    "chapter_id": 3,
+    "name": "First Remedy Master of Sword in One Hand",
+    "description": "The foundational defense when wielding the sword in a single hand without a buckler",
+    "instructions": "Hold the sword extended in your right hand with the point threatening the opponent's face. As they attack, step offline and parry with a yielding motion, then riposte with a thrust to the exposed target",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 15,
+    "chapter_id": 3,
+    "name": "Posta di Donna (Sword in One Hand)",
+    "description": "The Woman's Guard adapted for single-handed sword, held high on the right shoulder",
+    "instructions": "Hold the sword in your right hand with the hilt beside your right ear and the blade angled back over your shoulder. Step forward with a powerful descending cut that uses the full extension of the arm",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 16,
+    "chapter_id": 3,
+    "name": "Ligadura Mezana (Sword in One Hand)",
+    "description": "A middle lock applied after binding swords in single-hand play, transitioning from swordplay to grappling",
+    "instructions": "After your blades bind in the middle, pass your left hand to grip the opponent's sword wrist, release your own sword to hang from the wrist strap, and apply the middle lock with your free hand against their elbow",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 17,
+    "chapter_id": 3,
+    "name": "Colpo di Villano (Peasant's Strike - One Hand)",
+    "description": "A powerful rising cut from below, named for its raw simplicity and force",
+    "instructions": "From a low guard with the sword pointing down, deliver a powerful rising cut from your right side upward to the opponent's left temple, using the rotation of your hips to generate force despite the single-handed grip",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 18,
+    "chapter_id": 4,
+    "name": "Tutta Porta di Ferro (Full Iron Gate)",
+    "description": "A low guard with the sword held near the right hip, point angled toward the ground and slightly forward",
+    "instructions": "Stand with your left foot forward. Hold the sword with both hands near your right hip, the point aimed down and to the left. This guard protects the lower openings and invites high attacks that you can counter with rising cuts or thrusts",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 19,
+    "chapter_id": 4,
+    "name": "Posta di Donna (Woman's Guard)",
+    "description": "A high guard with the sword resting on or near the right shoulder, one of Fiore's most versatile positions",
+    "instructions": "Stand with your left foot forward. Rest the sword on your right shoulder with the hilt near your ear and the blade extending behind you. From here you can deliver powerful descending cuts to either side or thrust directly forward",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 20,
+    "chapter_id": 4,
+    "name": "Posta di Donna la Sinestra (Left Woman's Guard)",
+    "description": "The mirror image of Posta di Donna, held on the left shoulder for attacks from the opposite side",
+    "instructions": "Stand with your right foot forward. Cross your arms and rest the sword on your left shoulder. From here, deliver powerful cuts from the left side or transition into other guards by stepping through",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 21,
+    "chapter_id": 4,
+    "name": "Posta di Finestra (Window Guard)",
+    "description": "A high guard with the sword held beside the head, the hilt at temple height and the point threatening the opponent's face",
+    "instructions": "Hold the sword beside your right temple with the point aimed at the opponent's face and the true edge turned slightly outward. This guard allows thrusts, cuts from above, and strong parries against incoming attacks",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 22,
+    "chapter_id": 4,
+    "name": "Posta Frontale (Frontal Guard)",
+    "description": "A high guard with the sword held overhead, point aimed upward, covering the head",
+    "instructions": "Raise the sword directly above your head with the arms extended, point skyward and the true edge forward. This guard defends against all high attacks and can transition into powerful descending cuts in any direction",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 23,
+    "chapter_id": 4,
+    "name": "Posta Longa (Long Guard)",
+    "description": "An extended guard with the sword thrust forward at shoulder height, threatening the opponent with the point",
+    "instructions": "Extend the sword forward with both hands at shoulder height, arms nearly straight, point aimed at the opponent's face or chest. This guard dominates the centerline and forces the opponent to deal with the point before closing distance",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 24,
+    "chapter_id": 4,
+    "name": "Posta Breve (Short Guard)",
+    "description": "A compact middle guard with the sword held close to the body, point aimed at the opponent",
+    "instructions": "Hold the sword near your right hip with the point aimed at the opponent's face, elbows close to your body. This deceptive guard conceals your reach and allows quick thrusts or parry-ripostes",
+    "order_in_chapter": 7
+  },
+  {
+    "id": 25,
+    "chapter_id": 4,
+    "name": "Porta di Ferro Mezana (Middle Iron Gate)",
+    "description": "A centered low guard with the sword point aimed down along the centerline of the body",
+    "instructions": "Stand with your left foot forward and hold the sword with both hands at waist height, the point aimed down along your centerline. From here you can parry attacks to either side and respond with rising cuts or thrusts",
+    "order_in_chapter": 8
+  },
+  {
+    "id": 26,
+    "chapter_id": 4,
+    "name": "Dente di Zenghiaro (Boar's Tusk)",
+    "description": "A low guard with the sword point aimed upward from below, like a boar's tusk ready to gore",
+    "instructions": "Hold the sword low on your right side with the point rising upward at roughly 45 degrees, true edge up. This guard specializes in powerful rising thrusts and can deflect incoming cuts upward",
+    "order_in_chapter": 9
+  },
+  {
+    "id": 27,
+    "chapter_id": 4,
+    "name": "Posta di Bicorno (Two-Horned Guard)",
+    "description": "A guard with the sword held near the forehead, point aimed at the opponent's face, hands high",
+    "instructions": "Hold the sword at forehead height with the point directed at the opponent's face and the pommel close to your left temple. This guard threatens with the point and is strong for entering with thrusts against high attacks",
+    "order_in_chapter": 10
+  },
+  {
+    "id": 28,
+    "chapter_id": 4,
+    "name": "Coda Longa (Long Tail)",
+    "description": "A rear guard with the sword extended behind the body, concealing the blade from the opponent's view",
+    "instructions": "Stand with your left foot forward and extend the sword behind your right hip with the point aimed rearward and down. This guard conceals your intentions and allows powerful rising or sweeping cuts as the opponent closes",
+    "order_in_chapter": 11
+  },
+  {
+    "id": 29,
+    "chapter_id": 4,
+    "name": "Posta di Centrocruce (Central Cross Guard)",
+    "description": "A middle guard with the sword crossed at the center of the body, forming a defensive barrier",
+    "instructions": "Hold the sword horizontally at mid-chest height with the blade crossing your centerline, point to the left and the cross-guard forming a protective barrier. Use this guard to set up binds and close-quarter plays",
+    "order_in_chapter": 12
+  },
+  {
+    "id": 30,
+    "chapter_id": 4,
+    "name": "First Remedy Master of Zogho Largo (Wide Play)",
+    "description": "The foundational master of wide-measure longsword play, covering defenses when blades meet at the middle or weak of the blade",
+    "instructions": "When the opponent attacks with a cut, step offline with your front foot and meet their blade with a firm parry at the middle of your sword. From the bind, immediately thrust to their face or chest before they can recover",
+    "order_in_chapter": 13
+  },
+  {
+    "id": 31,
+    "chapter_id": 4,
+    "name": "Scambiar di Punta (Exchange of Thrust)",
+    "description": "A counter-thrust that deflects the opponent's attack while simultaneously thrusting to a new target",
+    "instructions": "As the opponent thrusts at you, beat their blade aside with the strong of your sword while stepping offline, and in the same motion extend your point into their exposed opening. The parry and thrust are one continuous action",
+    "order_in_chapter": 14
+  },
+  {
+    "id": 32,
+    "chapter_id": 4,
+    "name": "Rompere di Punta (Breaking the Thrust)",
+    "description": "A defense that beats aside an incoming thrust and follows with a devastating counter-cut",
+    "instructions": "Against an incoming thrust, step to the side and beat the blade down with a sharp descending motion of your sword. As their point drops, immediately follow with a rising cut to their arms or a thrust to the face",
+    "order_in_chapter": 15
+  },
+  {
+    "id": 33,
+    "chapter_id": 4,
+    "name": "First Master of Zogho Stretto (Close Play)",
+    "description": "The foundational master of close-measure play, where grappling and sword techniques merge",
+    "instructions": "When blades cross at close range, grip your opponent's blade or hilt with your left hand while keeping your sword threatening with your right. From here you can disarm, pommel strike, or apply locks from the wrestling section",
+    "order_in_chapter": 16
+  },
+  {
+    "id": 34,
+    "chapter_id": 4,
+    "name": "Posta di Corona (Crown Guard)",
+    "description": "A high guard used in close play with the sword held above the head, protecting against descending attacks at the half-sword",
+    "instructions": "Raise the sword above your head with both hands spread wide on the grip, the blade horizontal. This creates a strong roof-block against downward attacks and lets you respond by dropping into a thrust or grapple",
+    "order_in_chapter": 17
+  },
+  {
+    "id": 35,
+    "chapter_id": 4,
+    "name": "Colpo di Villano (Peasant's Strike)",
+    "description": "A powerful rising cut from below with both hands on the longsword, using full body rotation",
+    "instructions": "From a low guard, deliver a powerful rising cut from your right side upward to the opponent's left, rotating your hips and shoulders to drive the cut. This raw, committed strike is difficult to defend against due to its force",
+    "order_in_chapter": 18
+  },
+  {
+    "id": 36,
+    "chapter_id": 5,
+    "name": "Mezza Spada Guard (Half-Sword Guard)",
+    "description": "The fundamental armored combat stance with one hand on the grip and one on the blade for precision thrusting",
+    "instructions": "Grip the sword normally with your right hand and place your left hand on the middle of the blade. Aim the point at gaps in the opponent's armor (visor, armpits, groin). This grip sacrifices cutting power for precise thrusting control",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 37,
+    "chapter_id": 5,
+    "name": "Punta al Volto (Thrust to the Visor)",
+    "description": "A half-sword thrust aimed directly at the opponent's visor slit, exploiting the most accessible gap in plate armor",
+    "instructions": "From the half-sword guard, step forward with your lead foot and drive the point straight at the opponent's visor slit. Use your blade hand to guide the point precisely while your grip hand provides the driving force",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 38,
+    "chapter_id": 5,
+    "name": "Colpo di Pomo (Pommel Strike)",
+    "description": "A strike with the pommel of the sword to stun the opponent through their helmet",
+    "instructions": "In close measure, release your blade hand and swing the pommel into the opponent's visor or temple. The concentrated mass of the pommel transfers shock through the helmet. Follow immediately with a thrust or grapple",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 39,
+    "chapter_id": 5,
+    "name": "Ligadura in Arme (Armored Lock)",
+    "description": "An arm lock adapted for armored combat, using the sword as a lever against the opponent's joints",
+    "instructions": "After binding at the half-sword, hook your blade behind the opponent's elbow or knee and use it as a lever to force the joint. Step in close and use your body weight to drive the lock, forcing them to the ground",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 40,
+    "chapter_id": 5,
+    "name": "Disarm in Armor",
+    "description": "A technique for stripping the sword from an armored opponent by leveraging against gauntleted hands",
+    "instructions": "At the half-sword bind, pass your blade hand to grip the opponent's blade near their hands. Twist sharply against their thumbs while pulling toward you and stepping back, wrenching the weapon from their gauntlets",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 41,
+    "chapter_id": 6,
+    "name": "Posta di Donna with Poleaxe",
+    "description": "The Woman's Guard adapted for the poleaxe, held high on the right shoulder",
+    "instructions": "Hold the poleaxe with your right hand near the head and left hand at the butt, resting the shaft on your right shoulder. From here, deliver powerful descending strikes with the axe head or the hammer face",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 42,
+    "chapter_id": 6,
+    "name": "Porta di Ferro with Poleaxe",
+    "description": "The Iron Gate guard adapted for the poleaxe, held low to protect the lower body",
+    "instructions": "Hold the poleaxe low on your right side with the head pointing toward the ground and slightly forward. This guard invites high attacks and allows powerful rising strikes with the butt spike or sweeping blows with the head",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 43,
+    "chapter_id": 6,
+    "name": "Posta di Finestra with Poleaxe",
+    "description": "The Window Guard adapted for poleaxe, with the weapon held beside the head for thrusts and strikes",
+    "instructions": "Hold the poleaxe beside your head with the point (top spike) aimed at the opponent's face. Your right hand grips near the head for control, left hand at the butt for power. Thrust or deliver hooking strikes from this position",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 44,
+    "chapter_id": 6,
+    "name": "Colpo di Punta (Poleaxe Thrust)",
+    "description": "A direct thrust with the top spike of the poleaxe aimed at gaps in the opponent's armor",
+    "instructions": "From any guard, extend the poleaxe forward and drive the top spike at the opponent's visor, throat, or armpit. Slide your rear hand up the shaft for reach and use a lunging step to close distance",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 45,
+    "chapter_id": 6,
+    "name": "Posta di Vera Croce (Guard of the True Cross)",
+    "description": "A centered guard unique to the poleaxe with the weapon held horizontally across the body",
+    "instructions": "Hold the poleaxe horizontally at chest height with both hands spread wide, the head to your right and the butt to your left. This guard blocks attacks from either side and sets up hooks, trips, and short thrusts",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 46,
+    "chapter_id": 6,
+    "name": "Hook and Trip",
+    "description": "A takedown using the poleaxe head to hook the opponent's leg or neck and pull them to the ground",
+    "instructions": "After binding poleaxes, slide your weapon head past the opponent's neck or behind their lead leg. Pull sharply back toward you while stepping to the side, using the hook of the axe head to drag them off balance and to the ground",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 47,
+    "chapter_id": 7,
+    "name": "Tutta Porta di Ferro with Spear",
+    "description": "The Full Iron Gate adapted for the spear, held low to protect the lower line and invite high attacks",
+    "instructions": "Hold the spear low on your right side with the point angled down and forward, your right hand near the middle and left hand at the butt. Step forward with rising thrusts to counter attacks aimed at your upper body",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 48,
+    "chapter_id": 7,
+    "name": "Posta di Finestra with Spear",
+    "description": "The Window Guard adapted for the spear, with the point held high and threatening the opponent's face",
+    "instructions": "Hold the spear beside your head with the point aimed at the opponent's face, right hand forward near the balance point and left hand at the butt. From here deliver direct thrusts or beat aside incoming spear points",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 49,
+    "chapter_id": 7,
+    "name": "Posta di Donna with Spear",
+    "description": "The Woman's Guard adapted for the spear, held high on the shoulder for powerful thrusts",
+    "instructions": "Rest the spear shaft on your right shoulder with your right hand near the middle and left hand at the butt. Step forward and launch the spear point in a powerful overhand thrust, using the shoulder as a fulcrum for force",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 50,
+    "chapter_id": 7,
+    "name": "Scambiar di Punta with Spear (Exchange of Thrust)",
+    "description": "A counter-thrust that deflects the opponent's spear while simultaneously thrusting to a new line",
+    "instructions": "As the opponent thrusts, beat their spear point aside with a lateral motion of your shaft while stepping offline. In the same motion, redirect your point into the opening created by their committed thrust",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 51,
+    "chapter_id": 8,
+    "name": "Mounted Sword Guard",
+    "description": "The primary sword guard on horseback, holding the sword high and to the right for powerful passing strikes",
+    "instructions": "Sit upright in the saddle with the reins in your left hand. Hold the sword in your right hand at shoulder height with the blade angled back. As horses close, deliver a powerful descending cut timed to the pass, using the horse's momentum to amplify the strike",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 52,
+    "chapter_id": 8,
+    "name": "Mounted Spear Charge",
+    "description": "The lance couched under the arm for a devastating mounted charge at full gallop",
+    "instructions": "Tuck the lance under your right armpit with the point aimed at the opponent's chest or shield. Grip firmly at the balance point and brace the butt against your side. Aim for the center mass and let the horse's speed deliver the impact",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 53,
+    "chapter_id": 8,
+    "name": "Mounted Disarm",
+    "description": "A technique for stripping the weapon from an opposing rider during close mounted combat",
+    "instructions": "As horses come alongside, release the reins and grip the opponent's weapon hand or lance shaft with your left hand. Twist sharply while pulling them toward you across the saddle, using your horse's movement to amplify the disarming force",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 54,
+    "chapter_id": 8,
+    "name": "Horse Wrestling (Mounted Grappling)",
+    "description": "Techniques for unseating an opposing rider through grappling from horseback",
+    "instructions": "Close to grappling range and grip the opponent's torso, arm, or helmet. Push them sideways away from their saddle while bracing yourself with your legs. Alternatively, grip under their arm and lift while your horse presses against theirs to topple the rider",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 55,
+    "chapter_id": 9,
+    "name": "The Qualities of a Swordsman",
+    "description": "Vadi's seven virtues required of a fencer: audacity, speed, prudence, cunning, good eyesight, a strong constitution, and skill born from practice.",
+    "instructions": "Cultivate each of the seven virtues through disciplined training. Be bold but not reckless, swift yet controlled. Develop keen eyesight by practicing awareness exercises. Maintain physical fitness and hone your technique through daily repetition of guards and plays.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 56,
+    "chapter_id": 9,
+    "name": "The Division of the Sword",
+    "description": "Vadi divides the blade into four parts, each with a specific martial purpose — the first two parts near the point for cutting and thrusting, the third for parrying, and the fourth near the cross for binding and close work.",
+    "instructions": "Understand that the first quarter near the point is for thrusting and light cuts, the second quarter for powerful cuts, the third quarter near the middle for parrying and deflecting, and the fourth quarter near the cross-guard for binding, leverage, and half-sword work.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 57,
+    "chapter_id": 9,
+    "name": "On Tempo and Measure",
+    "description": "Vadi's concept of timing (tempo) and distance (measure) as the two pillars of swordsmanship. A strike must be delivered in the correct tempo at the correct measure, or it will fail.",
+    "instructions": "Train to recognize three measures: out of distance (fuora di misura) where no attack can land, wide measure (larga misura) where a passing step is needed to strike, and close measure (stretta misura) where a simple extension can reach. Strike only when tempo and measure align — when the opponent is between actions and within reach.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 58,
+    "chapter_id": 9,
+    "name": "On the Superiority of the Cut",
+    "description": "Vadi's argument that the cut is superior to the thrust in longsword combat, as it covers more of the body, generates greater force, and is safer to deliver.",
+    "instructions": "Prefer the cut over the thrust in longsword play. A well-delivered cut covers a wider arc of defense, damages through armor padding, and leaves you in a safer position after delivery. Reserve the thrust for half-sword and armored combat where precision targeting of gaps is necessary.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 59,
+    "chapter_id": 10,
+    "name": "Posta di Donna Destra (Right Woman's Guard)",
+    "description": "A high guard with the sword resting on the right shoulder, the most natural and powerful position for delivering descending cuts.",
+    "instructions": "Stand with your left foot forward. Rest the sword on your right shoulder with the hilt near your right ear, the blade extending behind you at a slight upward angle. Keep the true edge facing outward. From here, step forward and deliver powerful descending fendenti (vertical cuts) or tondo (horizontal cuts) to either side.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 60,
+    "chapter_id": 10,
+    "name": "Posta di Donna Sinestra (Left Woman's Guard)",
+    "description": "The mirror of Donna Destra, held on the left shoulder for attacks from the opposite side, requiring crossed arms.",
+    "instructions": "Stand with your right foot forward and cross your arms to rest the sword on your left shoulder. The hilt is near your left ear, the blade extending behind you. From here, deliver powerful cuts from the left, or step through with the left foot to transition into right-side guards.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 61,
+    "chapter_id": 10,
+    "name": "Posta di Finestra (Window Guard)",
+    "description": "A high guard held beside the head at temple height, threatening the opponent with the point while covering the upper body.",
+    "instructions": "Hold the sword beside your right temple with both hands, the point aimed at the opponent's face and the true edge turned slightly outward. This guard is strong for thrusting, for receiving cuts with a deflecting parry, and for transitioning into descending cuts.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 62,
+    "chapter_id": 10,
+    "name": "Posta Frontale (Frontal Guard)",
+    "description": "A high overhead guard with the sword held above the head, the point aimed skyward, providing maximum coverage against all high attacks.",
+    "instructions": "Raise the sword directly overhead with both arms extended, the point aimed upward and the true edge forward. This guard covers against attacks from any direction above and transitions powerfully into descending cuts. It is especially effective against opponents in lower guards.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 63,
+    "chapter_id": 10,
+    "name": "Posta Longa (Long Guard)",
+    "description": "An extended guard with the sword thrust forward at shoulder height, dominating the centerline with the point.",
+    "instructions": "Extend the sword forward with both hands at shoulder height, arms nearly fully extended, the point aimed at the opponent's face or chest. This guard threatens the centerline and is the position you naturally arrive in after completing a cut or thrust. It forces the opponent to deal with the point before advancing.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 64,
+    "chapter_id": 10,
+    "name": "Posta Breve (Short Guard)",
+    "description": "A deceptive middle guard with the sword held close to the body, concealing your true reach from the opponent.",
+    "instructions": "Hold the sword near your right hip with the point aimed at the opponent's face, elbows tucked close to your body. This guard conceals your measure — opponents misjudge the distance and step into range. From here, deliver quick thrusts or rising cuts as they close.",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 65,
+    "chapter_id": 10,
+    "name": "Porta di Ferro (Iron Gate)",
+    "description": "A low guard with the sword held near the right hip, the point angled toward the ground, protecting the lower openings and inviting high attacks.",
+    "instructions": "Stand with your left foot forward. Hold the sword with both hands near your right hip, the point aimed down and slightly to the left. This guard protects the lower body and invites high attacks that you can counter with rising cuts (sottani) or by passing into a thrust.",
+    "order_in_chapter": 7
+  },
+  {
+    "id": 66,
+    "chapter_id": 10,
+    "name": "Porta di Ferro Mezana (Middle Iron Gate)",
+    "description": "A centered low guard with the sword point aimed down along the body's centerline, offering balanced defense to both sides.",
+    "instructions": "Stand with your left foot forward. Hold the sword with both hands at waist height along your centerline, the point aimed down. From here you can parry attacks from either side and respond with rising cuts or thrusts. This is one of the most balanced and defensive postures.",
+    "order_in_chapter": 8
+  },
+  {
+    "id": 67,
+    "chapter_id": 10,
+    "name": "Coda Longa (Long Tail)",
+    "description": "A rear guard with the sword extended behind the body, concealing the blade entirely from the opponent's view.",
+    "instructions": "Stand with your left foot forward and extend the sword behind your right hip with the point aimed rearward and down. The opponent cannot see your blade and must guess your intentions. From here, deliver powerful rising or sweeping cuts as the opponent closes distance, or step through into a high guard.",
+    "order_in_chapter": 9
+  },
+  {
+    "id": 68,
+    "chapter_id": 10,
+    "name": "Posta Sagittaria (Archer's Guard)",
+    "description": "A guard unique to Vadi, resembling an archer drawing a bow, with the arms stretched wide and the sword held horizontally behind the body to deliver powerful round cuts.",
+    "instructions": "Stand with your left foot forward. Extend your left hand forward as if pointing at the opponent while the right hand draws the sword back behind your right hip, the blade nearly horizontal. The posture resembles drawing a bow. From here, unleash a devastatingly powerful tondo (round cut) by whipping the blade forward with full body rotation.",
+    "order_in_chapter": 10
+  },
+  {
+    "id": 69,
+    "chapter_id": 10,
+    "name": "Posta di Corona (Crown Guard)",
+    "description": "A guard with the sword held above and forward of the head, forming a protective crown, especially useful against descending attacks.",
+    "instructions": "Raise the sword above your head with both hands, the blade angled slightly forward and the point aimed upward and toward the opponent. This forms a protective roof against descending cuts. From the bind, push the opponent's blade aside and counter with a thrust or descending cut.",
+    "order_in_chapter": 11
+  },
+  {
+    "id": 70,
+    "chapter_id": 10,
+    "name": "Posta di Falcon (Falcon's Guard)",
+    "description": "A high guard similar to Window but held more forward and aggressively, the sword poised like a falcon about to strike.",
+    "instructions": "Hold the sword high and forward near the right side of your head, with the point angled slightly down toward the opponent. Unlike Finestra, the arms are more extended and the stance more aggressive. From here, deliver fast descending cuts or thrust directly at the opponent's face.",
+    "order_in_chapter": 12
+  },
+  {
+    "id": 71,
+    "chapter_id": 11,
+    "name": "Fendente Dritto (Right Descending Cut)",
+    "description": "A powerful vertical or diagonal descending cut delivered from the right side, the most fundamental offensive action in Vadi's system.",
+    "instructions": "From Posta di Donna Destra, step forward with the right foot and deliver a powerful descending cut along a diagonal line from your upper right to the opponent's lower left. Drive the cut with hip rotation, letting the sword's weight carry through the target. End in Porta di Ferro or Posta Longa.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 72,
+    "chapter_id": 11,
+    "name": "Fendente Sinistro (Left Descending Cut)",
+    "description": "A descending cut from the left side, delivered from Donna Sinestra or as a continuation from a previous action.",
+    "instructions": "From Posta di Donna Sinestra, step forward with the left foot and deliver a powerful descending cut along a diagonal from your upper left to the opponent's lower right. This cut is mechanically stronger when combined with a passing step, using the full rotation of the body.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 73,
+    "chapter_id": 11,
+    "name": "Sottano Dritto (Right Rising Cut)",
+    "description": "A rising cut delivered from below on the right side, targeting the opponent's arms, body, or face from a low guard.",
+    "instructions": "From Porta di Ferro, step forward with the left foot and deliver a rising cut from your lower right to the opponent's upper left. Rotate the hips upward to drive the cut. This attack is especially effective against opponents in high guards, as it strikes underneath their defense.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 74,
+    "chapter_id": 11,
+    "name": "Mezzano Dritto (Right Middle Cut)",
+    "description": "A horizontal cut delivered from the right at the level of the opponent's waist or arms, also called a tondo.",
+    "instructions": "From any right-side guard, step offline to the left and deliver a horizontal cut from right to left at the opponent's midsection. Rotate the entire body to drive the cut, keeping the arms extended. This cut is effective at wide measure and covers a large defensive arc.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 75,
+    "chapter_id": 11,
+    "name": "Colpo di Villano (Peasant's Strike)",
+    "description": "A raw, powerful rising cut from below that Vadi acknowledges as dangerous despite its lack of sophistication.",
+    "instructions": "From a low guard, deliver a powerful rising cut from your right side straight upward, using full hip and shoulder rotation. While lacking the finesse of other techniques, this strike generates tremendous force and is difficult to stop once in motion. Vadi warns that even a master must respect this cut.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 76,
+    "chapter_id": 11,
+    "name": "Rompere di Punta (Breaking the Thrust)",
+    "description": "A defensive technique that beats aside an incoming thrust and follows with an immediate counter-attack.",
+    "instructions": "As the opponent thrusts, step to the side and beat their blade down with a sharp descending parry using the third part of your sword. As their point drops, immediately follow with a rising cut to their arms or a direct thrust to the face. The parry must be firm and sharp to force their point off line.",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 77,
+    "chapter_id": 11,
+    "name": "Scambiar di Punta (Exchange of Thrust)",
+    "description": "A counter-thrust that simultaneously deflects the opponent's attack while landing your own thrust to a new opening.",
+    "instructions": "As the opponent thrusts, beat their blade aside with the strong of your sword while stepping offline. In the same continuous motion, redirect your point into their exposed opening — typically the face or chest. This is one action, not two: the deflection and counter-thrust happen together.",
+    "order_in_chapter": 7
+  },
+  {
+    "id": 78,
+    "chapter_id": 11,
+    "name": "Entrare in Stretto (Entering Close Play)",
+    "description": "The method of transitioning from wide measure into close-quarter combat where grappling and short-weapon techniques apply.",
+    "instructions": "After binding blades at wide measure, step forward aggressively with a passing step while maintaining blade contact. Slide your left hand up to grip the opponent's blade or wrist, controlling their weapon. From here, apply locks, disarms, pommel strikes, or throws from the wrestling section.",
+    "order_in_chapter": 8
+  },
+  {
+    "id": 79,
+    "chapter_id": 11,
+    "name": "Ligadura Soprana (Upper Lock from Sword)",
+    "description": "An arm lock applied at close measure after binding swords, levering the opponent's arm upward to force submission.",
+    "instructions": "After entering close play and gripping the opponent's sword arm, thread your left arm under their elbow and lever their forearm upward. Press down on their upper arm with your right hand while maintaining control of your sword against their body. Step behind them to amplify the leverage.",
+    "order_in_chapter": 9
+  },
+  {
+    "id": 80,
+    "chapter_id": 11,
+    "name": "Presa di Spada (Sword Taking)",
+    "description": "A disarm executed at close measure by seizing the opponent's blade and wrenching it from their grip.",
+    "instructions": "At the half-sword bind, pass your left hand to grip the opponent's blade near their hands. Step to the outside with your right foot to create an angle, then twist the blade sharply against their thumbs while pulling toward you. The combined rotation and pull overcomes their grip strength and strips the weapon.",
+    "order_in_chapter": 10
+  },
+  {
+    "id": 81,
+    "chapter_id": 11,
+    "name": "Pommel Strike (Colpo di Pomo)",
+    "description": "A close-range strike using the pommel of the sword to the opponent's face or head, stunning them for a follow-up.",
+    "instructions": "In close play, release your left hand from the grip and rotate the sword so the pommel swings upward into the opponent's face or temple. The concentrated mass of the pommel delivers a stunning blow even through a padded helmet. Immediately follow with a thrust, cut, or grapple while they are dazed.",
+    "order_in_chapter": 11
+  },
+  {
+    "id": 82,
+    "chapter_id": 12,
+    "name": "Half-Sword Guard (Mezza Spada)",
+    "description": "The fundamental armored combat stance with one hand on the grip and one on the blade, optimizing for precision thrusting into armor gaps.",
+    "instructions": "Grip the sword normally with your right hand on the handle. Place your left hand firmly on the middle of the blade with a gloved or gauntleted grip. Point the sword at the opponent's visor or armpit. This grip sacrifices cutting power for absolute precision in directing the point into narrow gaps in plate armor.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 83,
+    "chapter_id": 12,
+    "name": "Thrust to the Visor (Punta al Volto)",
+    "description": "A precise half-sword thrust aimed at the opponent's visor slit, the most accessible weak point in a closed helmet.",
+    "instructions": "From the half-sword guard, step forward with your lead foot and drive the point at the opponent's visor slit. Use your blade hand to guide the point with surgical precision while the grip hand provides the driving force. Aim slightly upward to catch the slit as helmets are angled to deflect blows.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 84,
+    "chapter_id": 12,
+    "name": "Thrust to the Armpit (Punta alla Ascella)",
+    "description": "A half-sword thrust targeting the armpit gap where the arm meets the torso, one of the largest unarmored areas on a fully equipped knight.",
+    "instructions": "When the opponent raises their arm to strike, step to the inside and drive the point upward into the exposed armpit. Guide the blade with your left hand to navigate past the edge of the breastplate. The thrust must be delivered before the arm descends, so timing with the opponent's action is critical.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 85,
+    "chapter_id": 12,
+    "name": "Thrust to the Groin (Punta al Sotto)",
+    "description": "A low half-sword thrust targeting the gap between the tasset plates and the leg armor, or through the mail skirt.",
+    "instructions": "Drop your stance low and aim the half-sword thrust upward at the gap between the opponent's hip armor and thigh protection. This target is available when the opponent steps forward, momentarily opening the gap. Step offline to avoid their weapon while delivering the thrust.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 86,
+    "chapter_id": 12,
+    "name": "Armored Disarm (Tor di Spada in Arme)",
+    "description": "A technique for stripping the sword from a gauntleted opponent by levering against the restricted grip of armored hands.",
+    "instructions": "After binding at the half-sword, hook your blade behind or over the opponent's hands and twist sharply. Gauntleted hands have reduced grip strength and flexibility, making disarms more effective in armor. Step to the outside while twisting to maximize leverage against their thumbs.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 87,
+    "chapter_id": 12,
+    "name": "Pommel Strike in Armor (Colpo di Pomo in Arme)",
+    "description": "A devastating pommel strike to the helmet at close range, using the pommel's mass to transmit concussive force through the helmet.",
+    "instructions": "In close armored combat, invert the sword and swing the pommel into the opponent's visor or temple. The heavy pommel concentrates force into a small area, transmitting shock through even the best helmet. Follow immediately with a thrust to a gap while the opponent is stunned.",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 88,
+    "chapter_id": 13,
+    "name": "First Remedy of Dagger (Overhead Defense)",
+    "description": "Defense against an overhead dagger strike, the most common assassination attack, using a cross-arm block to intercept the descending arm.",
+    "instructions": "As the attacker raises the dagger for an overhead strike, step forward with your left foot and raise both arms to intercept their forearm with crossed wrists above your head. Immediately grip their wrist with your left hand and strike their elbow with your right hand to break the grip.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 89,
+    "chapter_id": 13,
+    "name": "Second Remedy of Dagger (Forehand Defense)",
+    "description": "Defense against a forehand dagger thrust coming from the attacker's right side, intercepting the arm from the outside.",
+    "instructions": "As the attacker thrusts from their right side, step to the left with your left foot and intercept their wrist from the outside with your left hand. Pass your right hand over their arm to grip the dagger hand, then twist against the thumb to strip the weapon.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 90,
+    "chapter_id": 13,
+    "name": "Third Remedy of Dagger (Backhand Defense)",
+    "description": "Defense against a backhand dagger attack, intercepting the arm from the inside line.",
+    "instructions": "Against a backhand slash or thrust, step to the right with your right foot and catch the attacker's forearm from the inside with your right hand. Wrap your left arm around their elbow joint and apply downward pressure to lock the arm and control the weapon.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 91,
+    "chapter_id": 13,
+    "name": "Ligadura di Daga (Dagger Lock)",
+    "description": "An arm lock applied after intercepting a dagger attack, using leverage against the elbow to force the attacker to the ground.",
+    "instructions": "After catching the attacker's weapon arm, thread your arm under their elbow and lever their forearm upward while pressing their upper arm down. Step behind them and use your body weight to drive the lock, forcing them to their knees and compelling them to release the dagger.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 92,
+    "chapter_id": 13,
+    "name": "Tor di Daga (Dagger Disarm)",
+    "description": "A twisting disarm that strips the dagger from the attacker's grip by rotating the blade against the thumb.",
+    "instructions": "After intercepting the weapon hand, grip the dagger blade with your left hand and the attacker's wrist with your right. Rotate the blade sharply against their thumb while pulling the weapon toward you. The combined twist and pull overcomes the strongest grip.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 93,
+    "chapter_id": 13,
+    "name": "Counter-Dagger Thrust (Punta di Daga)",
+    "description": "After disarming the attacker, using their own dagger to deliver a finishing thrust.",
+    "instructions": "Once you have stripped the dagger from the attacker, immediately reverse your grip on the weapon and drive the point into the attacker's exposed body. Vadi emphasizes that the disarm and counter-thrust should be one fluid motion — do not pause between taking the weapon and using it.",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 94,
+    "chapter_id": 14,
+    "name": "Posta di Donna with Azza",
+    "description": "The Woman's Guard adapted for the poleaxe, held high on the right shoulder for powerful descending strikes with the axe head.",
+    "instructions": "Hold the poleaxe with your right hand near the head and left hand near the butt, resting the shaft on your right shoulder. From here, deliver powerful descending strikes with the axe head, the hammer face on the back, or thrust with the top spike. The passing step amplifies all strikes.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 95,
+    "chapter_id": 14,
+    "name": "Porta di Ferro with Azza",
+    "description": "The Iron Gate guard adapted for the poleaxe, held low and to the right, the head pointing toward the ground.",
+    "instructions": "Hold the poleaxe low on your right side with the head angled toward the ground and forward. This guard invites high attacks and allows powerful rising strikes with the butt spike or sweeping blows with the head. Step offline as the opponent commits high and strike to their exposed lower body.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 96,
+    "chapter_id": 14,
+    "name": "Posta di Vera Croce with Azza (True Cross)",
+    "description": "A centered guard unique to poleaxe combat with the weapon held horizontally across the body at chest height.",
+    "instructions": "Hold the poleaxe horizontally at chest height with both hands spread wide, the head to your right and the butt to your left. This guard blocks attacks from either side and is the ideal position for hooks, trips, short thrusts with the spike, and binding the opponent's weapon.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 97,
+    "chapter_id": 14,
+    "name": "Thrust with Top Spike (Punta di Azza)",
+    "description": "A direct thrust with the top spike of the poleaxe targeting gaps in the opponent's armor.",
+    "instructions": "From any guard, extend the poleaxe forward and drive the top spike at the opponent's visor, throat, or armpit. Slide your rear hand up the shaft to maximize reach, stepping forward with a lunge. The spike can penetrate mail and find gaps between plates.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 98,
+    "chapter_id": 14,
+    "name": "Hook and Trip (Gancio e Caduta)",
+    "description": "A takedown using the poleaxe head to hook the opponent's neck or leg and pull them off balance.",
+    "instructions": "After binding poleaxes, slide your weapon head past the opponent's neck or behind their lead leg. Pull sharply back toward you while stepping to the side, using the hook of the axe head to drag them off balance and to the ground. Follow with a thrust to a gap while they are down.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 99,
+    "chapter_id": 14,
+    "name": "Butt Spike Strike (Colpo di Calcio)",
+    "description": "A strike with the butt spike of the poleaxe, used at close range or as a surprise attack following a parry.",
+    "instructions": "After parrying an incoming blow with the middle of the shaft, slide your hands to reverse the weapon and thrust the butt spike into the opponent's visor or throat. The butt spike attack is unexpected because opponents focus on the axe head, making it an excellent counter-attack at close range.",
+    "order_in_chapter": 6
+  },
+  {
+    "id": 100,
+    "chapter_id": 15,
+    "name": "Porta di Ferro with Spear",
+    "description": "The Iron Gate guard adapted for the spear, held low to protect the lower line and invite high attacks.",
+    "instructions": "Hold the spear low on your right side with the point angled downward and forward. Your right hand grips near the middle of the shaft and your left hand near the butt. Step forward with rising thrusts to counter high attacks, using the spear's length to strike before the opponent can reach you.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 101,
+    "chapter_id": 15,
+    "name": "Posta di Finestra with Spear",
+    "description": "The Window Guard adapted for the spear, with the point held high and threatening the opponent's face.",
+    "instructions": "Hold the spear beside your head with the point aimed at the opponent's face. Your right hand grips forward near the balance point and your left hand at the butt. From here, deliver direct thrusts or beat aside incoming spear points with lateral motions of the shaft.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 102,
+    "chapter_id": 15,
+    "name": "Posta di Donna with Spear",
+    "description": "The Woman's Guard adapted for the spear, held high on the shoulder for powerful overhand thrusts.",
+    "instructions": "Rest the spear shaft on your right shoulder with your right hand near the middle and left hand at the butt. Step forward and launch the spear point in a powerful overhand thrust, using the shoulder as a fulcrum. This is the most powerful spear thrust and can be aimed at the face or chest.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 103,
+    "chapter_id": 15,
+    "name": "Exchange of Thrust with Spear (Scambiar di Punta)",
+    "description": "A counter-thrust that deflects the opponent's spear while simultaneously thrusting to a new line.",
+    "instructions": "As the opponent thrusts, beat their spear point aside with a lateral motion of your shaft while stepping offline. In the same motion, redirect your own point into the opening created by their committed thrust. The timing must be precise — too early and they recover, too late and you are struck.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 104,
+    "chapter_id": 15,
+    "name": "Closing Against the Spear (Entrare Contra Lancia)",
+    "description": "The technique of getting inside the spear's effective range to engage at close quarters with shorter weapons or grappling.",
+    "instructions": "As the opponent thrusts, beat their point aside and immediately rush forward along the shaft, gripping it with your lead hand to prevent a second thrust. Close to grappling range where the spear becomes a liability. Use dagger or wrestling techniques once inside their reach.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 105,
+    "chapter_id": 16,
+    "name": "First Remedy of Grappling",
+    "description": "The fundamental defensive position against a grappling attack, establishing control of the opponent's arms before they can secure a grip.",
+    "instructions": "As the opponent reaches to grab you, step offline with your left foot and seize their right arm at the elbow with your left hand. Push their face or chin with your right hand to off-balance them rearward. From this position of advantage, transition into locks or throws.",
+    "order_in_chapter": 1
+  },
+  {
+    "id": 106,
+    "chapter_id": 16,
+    "name": "Upper Lock (Ligadura Soprana)",
+    "description": "An arm lock that forces the opponent's arm upward behind their back, compelling submission through pain.",
+    "instructions": "From a grip on the opponent's right arm, thread your right arm under their elbow and lever their forearm upward while pressing down on their upper arm with your left hand. Step behind them and use your chest against their shoulder to amplify the lock. They must submit or risk a dislocated shoulder.",
+    "order_in_chapter": 2
+  },
+  {
+    "id": 107,
+    "chapter_id": 16,
+    "name": "Hip Throw (Volta di Fianco)",
+    "description": "A powerful hip throw that uses the rotation of the hips to send the opponent over and to the ground.",
+    "instructions": "From a clinch, step your right foot across in front of the opponent and drop your hips below theirs. Pull them onto your hip with your arms while rotating sharply to the left. The combination of the pull and hip rotation launches them over your body to the ground. Follow them down to maintain control.",
+    "order_in_chapter": 3
+  },
+  {
+    "id": 108,
+    "chapter_id": 16,
+    "name": "Leg Hook Takedown (Gancio di Gamba)",
+    "description": "A takedown that uses the leg to hook the opponent's knee or ankle while pushing them backward.",
+    "instructions": "From a clinch or collar grip, step your right leg behind the opponent's lead leg, hooking their ankle or calf. Push them sharply backward with your arms and body weight while your hooked leg prevents them from stepping back to recover balance. They fall rearward over your leg.",
+    "order_in_chapter": 4
+  },
+  {
+    "id": 109,
+    "chapter_id": 16,
+    "name": "Lower Lock (Ligadura Sottana)",
+    "description": "A lower arm lock that takes the opponent to the ground by twisting their arm downward and outward.",
+    "instructions": "Seize the opponent's right wrist with both hands and step back with your right foot. Twist their arm downward and outward, rotating against the natural bend of the elbow. The pain and leverage force them face-down to the ground where you can hold them in submission.",
+    "order_in_chapter": 5
+  },
+  {
+    "id": 110,
+    "chapter_id": 16,
+    "name": "Collar Throw (Presa di Collare)",
+    "description": "A throw using a grip on the opponent's collar or the back of their neck to pull them forward and down.",
+    "instructions": "Grip the opponent's collar or the back of their neck with your left hand. Step to the side and pull them sharply forward and downward while placing your right arm across their chest or under their arm as a fulcrum. The pull combined with the body block sends them tumbling forward to the ground.",
+    "order_in_chapter": 6
   }
 ]

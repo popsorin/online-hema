@@ -36,3 +36,4 @@ redis_data/
 
 # Logs
 *.log
+google-cloud-sdk/

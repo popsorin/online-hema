@@ -148,6 +148,9 @@ gcloud run revisions list --service hema-lessons-api --region us-central1
 gcloud run services update-traffic hema-lessons-api \
   --region us-central1 \
   --to-revisions <revision-name>=100
+
+#deploy new code:
+gcloud run deploy hema-lessons-api --source . --region us-east1
 ```
 
 ## Free Tier Limits

@@ -1,0 +1,25 @@
+# Book Seed Template
+# Usage: go run cmd/seedbook/main.go [--dry-run] <this-file.yaml>
+#
+# Reference an existing sword master by name:
+sword_master: "Master Name"
+#
+# Or create a new one (remove sword_master above if using this):
+# new_sword_master:
+#   name: "New Master Name"
+#   bio: "Short biography"
+#   birth_year: 1300
+#   death_year: 1400
+
+book:
+  title: "Book Title"
+  description: "A short description of this fighting treatise"
+  publication_year: 1400
+
+chapters:
+  - title: "Chapter Title"
+    description: "What this chapter covers"
+    techniques:
+      - name: "Technique Name"
+        description: "What this technique is"
+        instructions: "How to perform this technique step by step"

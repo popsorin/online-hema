@@ -3,28 +3,112 @@
     "id": 1,
     "fighting_book_id": 2,
     "chapter_number": 1,
-    "title": "Wrestling",
-    "description": "Techniques for unarmed combat and grappling"
+    "title": "Abrazare (Wrestling)",
+    "description": "Unarmed combat and grappling techniques forming the foundation of Fiore's system"
   },
   {
     "id": 2,
     "fighting_book_id": 2,
     "chapter_number": 2,
-    "title": "Dagger Combat",
-    "description": "Fighting with the dagger in various situations"
+    "title": "Dagger (Daga)",
+    "description": "Fighting with and against the dagger at close range, including defenses against common attacks"
   },
   {
     "id": 3,
     "fighting_book_id": 2,
     "chapter_number": 3,
-    "title": "Longsword",
-    "description": "The art of fighting with the longsword"
+    "title": "Sword in One Hand (Spada a un mano)",
+    "description": "Techniques for wielding the sword in a single hand without a shield"
   },
   {
     "id": 4,
     "fighting_book_id": 2,
     "chapter_number": 4,
-    "title": "Poleaxe",
-    "description": "Combat techniques with the poleaxe"
+    "title": "Longsword (Spada a due mani)",
+    "description": "The art of the two-handed sword, the largest and most detailed section of the treatise"
+  },
+  {
+    "id": 5,
+    "fighting_book_id": 2,
+    "chapter_number": 5,
+    "title": "Sword in Armor (Spada in arme)",
+    "description": "Half-sword techniques and armored combat with the longsword"
+  },
+  {
+    "id": 6,
+    "fighting_book_id": 2,
+    "chapter_number": 6,
+    "title": "Poleaxe (Azza)",
+    "description": "Combat techniques with the poleaxe, a favored weapon for armored dueling"
+  },
+  {
+    "id": 7,
+    "fighting_book_id": 2,
+    "chapter_number": 7,
+    "title": "Spear (Lancia)",
+    "description": "Fighting with the spear on foot, including guards and exchanges of thrust"
+  },
+  {
+    "id": 8,
+    "fighting_book_id": 2,
+    "chapter_number": 8,
+    "title": "Mounted Combat (Equestrian)",
+    "description": "Combat on horseback with sword and lance, including mounted grappling"
+  },
+  {
+    "id": 9,
+    "fighting_book_id": 4,
+    "chapter_number": 1,
+    "title": "Foundations and Principles",
+    "description": "The theoretical introduction to Vadi's system, covering the qualities of a good swordsman, the importance of tempo and measure, the anatomy of the sword, and the philosophical underpinnings of the art of defense."
+  },
+  {
+    "id": 10,
+    "fighting_book_id": 4,
+    "chapter_number": 2,
+    "title": "Longsword Guards (Poste)",
+    "description": "The twelve guard positions of Vadi's longsword system, each a starting point for offense and defense. Several guards are shared with the Fiore tradition while others, like the Archer's Guard, are unique to Vadi."
+  },
+  {
+    "id": 11,
+    "fighting_book_id": 4,
+    "chapter_number": 3,
+    "title": "Longsword Plays (Zogho)",
+    "description": "The practical exchanges and techniques of Vadi's longsword system, covering cuts, thrusts, counters, disarms, and the transitions between wide and close play."
+  },
+  {
+    "id": 12,
+    "fighting_book_id": 4,
+    "chapter_number": 4,
+    "title": "Sword in Armor (Spada in Arme)",
+    "description": "Vadi's techniques for armored combat using the half-sword grip, targeting the gaps and weak points in plate armor with precise thrusts and leveraged techniques."
+  },
+  {
+    "id": 13,
+    "fighting_book_id": 4,
+    "chapter_number": 5,
+    "title": "Dagger (Daga)",
+    "description": "Vadi's system of dagger combat covering defenses against common attacks, disarms, locks, and counters. The dagger section focuses on empty-hand defenses against an armed opponent."
+  },
+  {
+    "id": 14,
+    "fighting_book_id": 4,
+    "chapter_number": 6,
+    "title": "Poleaxe (Azza)",
+    "description": "Vadi's techniques for combat with the poleaxe, a favored weapon for armored judicial duels. The section covers guards, strikes, thrusts, and takedowns specific to this versatile weapon."
+  },
+  {
+    "id": 15,
+    "fighting_book_id": 4,
+    "chapter_number": 7,
+    "title": "Spear (Lancia)",
+    "description": "Vadi's spear combat on foot, covering guards, thrusts, exchanges, and methods to close distance against a spear-armed opponent."
+  },
+  {
+    "id": 16,
+    "fighting_book_id": 4,
+    "chapter_number": 8,
+    "title": "Grappling (Abrazare)",
+    "description": "Vadi's wrestling techniques that underpin the entire system, including throws, locks, and takedowns that are applied when weapons bind at close range or in unarmed situations."
   }
 ]

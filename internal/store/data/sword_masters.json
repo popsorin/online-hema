@@ -19,5 +19,12 @@
     "bio": "German fencing master and student of Johannes Liechtenauer",
     "birth_year": 1400,
     "death_year": 1470
+  },
+  {
+    "id": 4,
+    "name": "Filippo Vadi",
+    "bio": "Italian fencing master from Pisa, active in the late 15th century. A student of the Fiore dei Liberi tradition, Vadi served at the court of Guidobaldo da Montefeltro, Duke of Urbino. His treatise blends the Italian school with original contributions on tempo, measure, and the primacy of the cut.",
+    "birth_year": 1425,
+    "death_year": 1501
   }
 ]

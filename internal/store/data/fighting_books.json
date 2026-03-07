@@ -19,5 +19,12 @@
     "title": "Fechtbuch",
     "description": "A detailed commentary on Liechtenauer's teachings with practical applications",
     "publication_year": 1440
+  },
+  {
+    "id": 4,
+    "sword_master_id": 4,
+    "title": "De Arte Gladiatoria Dimicandi",
+    "description": "On the Art of Swordsmanship — a comprehensive Italian fighting treatise dedicated to Duke Guidobaldo da Montefeltro of Urbino. Written in verse and prose, it covers longsword, dagger, poleaxe, spear, one-handed sword, armored combat, and grappling, building on the Fiore tradition while introducing original concepts on tempo, measure, and the superiority of the cut over the thrust.",
+    "publication_year": 1482
   }
 ]
