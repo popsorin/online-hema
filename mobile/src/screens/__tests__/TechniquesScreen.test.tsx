@@ -8,13 +8,13 @@ const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({navigate: mockNavigate, goBack: mockGoBack}),
   useRoute: () => ({
-    params: {chapterId: 3, chapterTitle: 'Longsword'},
+    params: {sectionId: 3, sectionTitle: 'Longsword'},
   }),
 }));
 
-const mockGetTechniques = jest.fn();
+const mockGetItems = jest.fn();
 jest.mock('@/api/content', () => ({
-  getTechniques: (...args: unknown[]) => mockGetTechniques(...args),
+  getItems: (...args: unknown[]) => mockGetItems(...args),
 }));
 
 function createWrapper() {
@@ -33,8 +33,8 @@ describe('TechniquesScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the chapter title in the header', async () => {
-    mockGetTechniques.mockResolvedValue([]);
+  it('renders the section title in the header', async () => {
+    mockGetItems.mockResolvedValue([]);
 
     const {getByText} = render(<TechniquesScreen />, {
       wrapper: createWrapper(),
@@ -44,31 +44,25 @@ describe('TechniquesScreen', () => {
     expect(getByText('Techniques')).toBeTruthy();
   });
 
-  it('renders technique list', async () => {
-    mockGetTechniques.mockResolvedValue([
+  it('renders item list', async () => {
+    mockGetItems.mockResolvedValue([
       {
         id: 1,
-        chapter_id: 3,
-        name: 'Posta di Donna',
+        section_id: 3,
+        kind: 'technique',
+        title: 'Posta di Donna',
         description: "The Woman's Guard",
-        instructions: 'Hold the sword near your right shoulder',
-        video_url: null,
-        thumbnail_url: null,
-        order_in_chapter: 1,
-        created_at: '2026-01-18T10:00:00Z',
-        updated_at: '2026-01-18T10:00:00Z',
+        position: 1,
+        attributes: {instructions: 'Hold the sword near your right shoulder'},
       },
       {
         id: 2,
-        chapter_id: 3,
-        name: 'Zornhau',
+        section_id: 3,
+        kind: 'technique',
+        title: 'Zornhau',
         description: 'The Wrath Strike',
-        instructions: 'Strike diagonally',
-        video_url: null,
-        thumbnail_url: null,
-        order_in_chapter: 2,
-        created_at: '2026-01-18T10:00:00Z',
-        updated_at: '2026-01-18T10:00:00Z',
+        position: 2,
+        attributes: {instructions: 'Strike diagonally'},
       },
     ]);
 
@@ -82,20 +76,17 @@ describe('TechniquesScreen', () => {
     expect(getByText('Zornhau')).toBeTruthy();
   });
 
-  it('navigates to TechniqueDetail when a technique is pressed', async () => {
-    const technique = {
+  it('navigates to TechniqueDetail when an item is pressed', async () => {
+    const item = {
       id: 1,
-      chapter_id: 3,
-      name: 'Posta di Donna',
+      section_id: 3,
+      kind: 'technique',
+      title: 'Posta di Donna',
       description: "The Woman's Guard",
-      instructions: 'Hold the sword near your right shoulder',
-      video_url: null,
-      thumbnail_url: null,
-      order_in_chapter: 1,
-      created_at: '2026-01-18T10:00:00Z',
-      updated_at: '2026-01-18T10:00:00Z',
+      position: 1,
+      attributes: {instructions: 'Hold the sword near your right shoulder'},
     };
-    mockGetTechniques.mockResolvedValue([technique]);
+    mockGetItems.mockResolvedValue([item]);
 
     const {getByTestId} = render(<TechniquesScreen />, {
       wrapper: createWrapper(),
@@ -107,12 +98,12 @@ describe('TechniquesScreen', () => {
 
     fireEvent.press(getByTestId('technique-button-1'));
     expect(mockNavigate).toHaveBeenCalledWith('TechniqueDetail', {
-      technique,
+      item,
     });
   });
 
   it('navigates back when back button is pressed', async () => {
-    mockGetTechniques.mockResolvedValue([]);
+    mockGetItems.mockResolvedValue([]);
 
     const {getByTestId} = render(<TechniquesScreen />, {
       wrapper: createWrapper(),
@@ -122,15 +113,15 @@ describe('TechniquesScreen', () => {
     expect(mockGoBack).toHaveBeenCalled();
   });
 
-  it('shows empty message when no techniques', async () => {
-    mockGetTechniques.mockResolvedValue([]);
+  it('shows empty message when no items', async () => {
+    mockGetItems.mockResolvedValue([]);
 
     const {getByText} = render(<TechniquesScreen />, {
       wrapper: createWrapper(),
     });
 
     await waitFor(() => {
-      expect(getByText('No techniques available yet.')).toBeTruthy();
+      expect(getByText('No items available yet.')).toBeTruthy();
     });
   });
 });

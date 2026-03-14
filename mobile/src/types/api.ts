@@ -5,39 +5,34 @@
  */
 
 // Content types
-export interface FightingBook {
+export interface Resource {
   id: number;
-  sword_master_id: number;
+  author_id?: number;
   title: string;
   description: string;
-  publication_year: number;
-  cover_image_url: string | null;
-  created_at: string;
-  updated_at: string;
-  sword_master_name: string;
+  publication_year?: number;
+  cover_image_url?: string;
+  author_name?: string;
 }
 
-export interface Chapter {
+export interface Section {
   id: number;
-  fighting_book_id: number;
-  chapter_number: number;
+  resource_id: number;
+  parent_id?: number;
+  kind: string;
   title: string;
   description: string;
-  created_at: string;
-  updated_at: string;
+  position: number;
 }
 
-export interface Technique {
+export interface Item {
   id: number;
-  chapter_id: number;
-  name: string;
+  section_id: number;
+  kind: string;
+  title: string;
   description: string;
-  instructions: string;
-  video_url: string | null;
-  thumbnail_url: string | null;
-  order_in_chapter: number;
-  created_at: string;
-  updated_at: string;
+  position: number;
+  attributes?: Record<string, string>;
 }
 
 // Pagination types
@@ -52,10 +47,4 @@ export interface PaginatedResponse<T> {
 export interface PaginationParams {
   page?: number;
   page_size?: number;
-}
-
-// Health check
-export interface HealthResponse {
-  status: string;
-  timestamp: string;
 }

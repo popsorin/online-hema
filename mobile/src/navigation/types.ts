@@ -5,16 +5,16 @@
  */
 
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import type {Technique} from '@/types/api';
+import type {Item} from '@/types/api';
 
 /**
  * Main Stack - all app screens (content is publicly accessible)
  */
 export type MainStackParamList = {
   Home: undefined;
-  Chapters: {bookId: number; bookTitle: string};
-  Techniques: {chapterId: number; chapterTitle: string};
-  TechniqueDetail: {technique: Technique};
+  Chapters: {resourceId: number; resourceTitle: string};
+  Techniques: {sectionId: number; sectionTitle: string};
+  TechniqueDetail: {item: Item};
 };
 
 export type MainStackScreenProps<T extends keyof MainStackParamList> =

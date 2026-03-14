@@ -1,8 +1,8 @@
 /**
  * Techniques Screen
  *
- * Displays a list of techniques for a chapter.
- * Each technique is a clickable button that navigates to the technique detail.
+ * Displays a list of items for a section.
+ * Each item is a clickable button that navigates to the item detail.
  */
 
 import React, {useCallback} from 'react';
@@ -20,8 +20,8 @@ import {useQuery} from '@tanstack/react-query';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RouteProp} from '@react-navigation/native';
-import {getTechniques} from '@/api/content';
-import type {Technique} from '@/types/api';
+import {getItems} from '@/api/content';
+import type {Item} from '@/types/api';
 import type {MainStackParamList} from '@/navigation/types';
 
 type NavigationProp = NativeStackNavigationProp<
@@ -33,39 +33,39 @@ type TechniquesRouteProp = RouteProp<MainStackParamList, 'Techniques'>;
 const TechniquesScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<TechniquesRouteProp>();
-  const {chapterId, chapterTitle} = route.params;
+  const {sectionId, sectionTitle} = route.params;
 
   const {
-    data: techniques,
+    data: items,
     isLoading,
     isError,
     error,
     refetch,
     isRefetching,
   } = useQuery({
-    queryKey: ['techniques', chapterId],
-    queryFn: () => getTechniques(chapterId),
+    queryKey: ['items', sectionId],
+    queryFn: () => getItems(sectionId),
   });
 
-  const handleTechniquePress = useCallback(
-    (technique: Technique) => {
-      navigation.navigate('TechniqueDetail', {technique});
+  const handleItemPress = useCallback(
+    (item: Item) => {
+      navigation.navigate('TechniqueDetail', {item});
     },
     [navigation],
   );
 
-  const renderTechnique = useCallback(
-    ({item}: {item: Technique}) => (
+  const renderItem = useCallback(
+    ({item}: {item: Item}) => (
       <TouchableOpacity
         style={styles.techniqueButton}
-        onPress={() => handleTechniquePress(item)}
+        onPress={() => handleItemPress(item)}
         activeOpacity={0.7}
         testID={`technique-button-${item.id}`}>
         <View style={styles.orderBadge}>
-          <Text style={styles.orderText}>{item.order_in_chapter}</Text>
+          <Text style={styles.orderText}>{item.position}</Text>
         </View>
         <View style={styles.techniqueInfo}>
-          <Text style={styles.techniqueName}>{item.name}</Text>
+          <Text style={styles.techniqueName}>{item.title}</Text>
           <Text style={styles.techniqueDescription} numberOfLines={2}>
             {item.description}
           </Text>
@@ -73,7 +73,7 @@ const TechniquesScreen: React.FC = () => {
         <Text style={styles.chevron}>&#8250;</Text>
       </TouchableOpacity>
     ),
-    [handleTechniquePress],
+    [handleItemPress],
   );
 
   const renderEmpty = useCallback(() => {
@@ -82,7 +82,7 @@ const TechniquesScreen: React.FC = () => {
     }
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No techniques available yet.</Text>
+        <Text style={styles.emptyText}>No items available yet.</Text>
       </View>
     );
   }, [isLoading]);
@@ -98,7 +98,7 @@ const TechniquesScreen: React.FC = () => {
         </TouchableOpacity>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle} numberOfLines={1}>
-            {chapterTitle}
+            {sectionTitle}
           </Text>
           <Text style={styles.headerSubtitle}>Techniques</Text>
         </View>
@@ -122,9 +122,9 @@ const TechniquesScreen: React.FC = () => {
         </View>
       ) : (
         <FlatList
-          data={techniques}
-          renderItem={renderTechnique}
-          keyExtractor={(item) => item.id.toString()}
+          data={items}
+          renderItem={renderItem}
+          keyExtractor={(i) => i.id.toString()}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmpty}
           refreshControl={

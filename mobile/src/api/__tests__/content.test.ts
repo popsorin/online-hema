@@ -1,5 +1,5 @@
 import apiClient from '../client';
-import {getFightingBooks, getChapters, getTechniques} from '../content';
+import {getResources, getSections, getItems} from '../content';
 
 jest.mock('../client', () => ({
   __esModule: true,
@@ -15,7 +15,7 @@ describe('Content API', () => {
     jest.clearAllMocks();
   });
 
-  describe('getFightingBooks', () => {
+  describe('getResources', () => {
     it('calls the correct endpoint with default params', async () => {
       const mockResponse = {
         data: {
@@ -28,9 +28,9 @@ describe('Content API', () => {
       };
       mockedGet.mockResolvedValue(mockResponse);
 
-      const result = await getFightingBooks();
+      const result = await getResources();
 
-      expect(mockedGet).toHaveBeenCalledWith('/api/fighting-books', {
+      expect(mockedGet).toHaveBeenCalledWith('/api/resources', {
         params: {page: undefined, page_size: undefined},
       });
       expect(result).toEqual(mockResponse.data);
@@ -39,7 +39,7 @@ describe('Content API', () => {
     it('passes pagination params correctly', async () => {
       const mockResponse = {
         data: {
-          data: [{id: 1, title: 'Test Book'}],
+          data: [{id: 1, title: 'Test Resource'}],
           page: 2,
           page_size: 10,
           total_count: 15,
@@ -48,44 +48,44 @@ describe('Content API', () => {
       };
       mockedGet.mockResolvedValue(mockResponse);
 
-      const result = await getFightingBooks({page: 2, page_size: 10});
+      const result = await getResources({page: 2, page_size: 10});
 
-      expect(mockedGet).toHaveBeenCalledWith('/api/fighting-books', {
+      expect(mockedGet).toHaveBeenCalledWith('/api/resources', {
         params: {page: 2, page_size: 10},
       });
       expect(result).toEqual(mockResponse.data);
     });
   });
 
-  describe('getChapters', () => {
-    it('calls the correct endpoint with book ID', async () => {
-      const mockChapters = [
-        {id: 1, fighting_book_id: 5, chapter_number: 1, title: 'Wrestling'},
+  describe('getSections', () => {
+    it('calls the correct endpoint with resource ID', async () => {
+      const mockSections = [
+        {id: 1, resource_id: 5, kind: 'chapter', position: 1, title: 'Wrestling', description: 'Unarmed combat'},
       ];
-      mockedGet.mockResolvedValue({data: mockChapters});
+      mockedGet.mockResolvedValue({data: mockSections});
 
-      const result = await getChapters(5);
+      const result = await getSections(5);
 
       expect(mockedGet).toHaveBeenCalledWith(
-        '/api/fighting-books/5/chapters',
+        '/api/resources/5/sections',
       );
-      expect(result).toEqual(mockChapters);
+      expect(result).toEqual(mockSections);
     });
   });
 
-  describe('getTechniques', () => {
-    it('calls the correct endpoint with chapter ID', async () => {
-      const mockTechniques = [
-        {id: 1, chapter_id: 3, name: 'Zornhau', order_in_chapter: 1},
+  describe('getItems', () => {
+    it('calls the correct endpoint with section ID', async () => {
+      const mockItems = [
+        {id: 1, section_id: 3, kind: 'technique', title: 'Zornhau', description: 'Wrath Strike', position: 1},
       ];
-      mockedGet.mockResolvedValue({data: mockTechniques});
+      mockedGet.mockResolvedValue({data: mockItems});
 
-      const result = await getTechniques(3);
+      const result = await getItems(3);
 
       expect(mockedGet).toHaveBeenCalledWith(
-        '/api/chapters/3/techniques',
+        '/api/sections/3/items',
       );
-      expect(result).toEqual(mockTechniques);
+      expect(result).toEqual(mockItems);
     });
   });
 });

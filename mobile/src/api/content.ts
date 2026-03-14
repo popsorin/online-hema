@@ -1,27 +1,27 @@
 /**
  * Content API
  *
- * Handles all content-related API calls (fighting books, chapters, techniques).
+ * Handles all content-related API calls (resources, sections, items).
  * These endpoints are publicly accessible without authentication.
  */
 
 import apiClient from './client';
 import type {
-  FightingBook,
-  Chapter,
-  Technique,
+  Resource,
+  Section,
+  Item,
   PaginatedResponse,
   PaginationParams,
 } from '@/types/api';
 
 /**
- * Get a paginated list of fighting books
+ * Get a paginated list of resources
  */
-export const getFightingBooks = async (
+export const getResources = async (
   params: PaginationParams = {},
-): Promise<PaginatedResponse<FightingBook>> => {
-  const response = await apiClient.get<PaginatedResponse<FightingBook>>(
-    '/api/fighting-books',
+): Promise<PaginatedResponse<Resource>> => {
+  const response = await apiClient.get<PaginatedResponse<Resource>>(
+    '/api/resources',
     {
       params: {
         page: params.page,
@@ -33,23 +33,21 @@ export const getFightingBooks = async (
 };
 
 /**
- * Get all chapters for a fighting book
+ * Get all root sections for a resource
  */
-export const getChapters = async (bookId: number): Promise<Chapter[]> => {
-  const response = await apiClient.get<Chapter[]>(
-    `/api/fighting-books/${bookId}/chapters`,
+export const getSections = async (resourceId: number): Promise<Section[]> => {
+  const response = await apiClient.get<Section[]>(
+    `/api/resources/${resourceId}/sections`,
   );
   return response.data;
 };
 
 /**
- * Get all techniques for a chapter
+ * Get all items for a section
  */
-export const getTechniques = async (
-  chapterId: number,
-): Promise<Technique[]> => {
-  const response = await apiClient.get<Technique[]>(
-    `/api/chapters/${chapterId}/techniques`,
+export const getItems = async (sectionId: number): Promise<Item[]> => {
+  const response = await apiClient.get<Item[]>(
+    `/api/sections/${sectionId}/items`,
   );
   return response.data;
 };

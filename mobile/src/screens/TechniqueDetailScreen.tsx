@@ -1,8 +1,8 @@
 /**
  * Technique Detail Screen
  *
- * Displays full details of a technique: name, description, instructions,
- * and a video player (or placeholder if no video is available).
+ * Displays full details of an item: title, description, instructions,
+ * and a historical image (or placeholder if none is available).
  */
 
 import React from 'react';
@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Linking,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -29,17 +28,10 @@ type DetailRouteProp = RouteProp<MainStackParamList, 'TechniqueDetail'>;
 const TechniqueDetailScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<DetailRouteProp>();
-  const {technique} = route.params;
+  const {item} = route.params;
 
-  const handleVideoPress = async () => {
-    if (technique.video_url) {
-      try {
-        await Linking.openURL(technique.video_url);
-      } catch {
-        // silently fail if URL can't be opened
-      }
-    }
-  };
+  const instructions = item.attributes?.instructions;
+  const historicalImageUrl = item.attributes?.historical_image_url;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,23 +53,19 @@ const TechniqueDetailScreen: React.FC = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         testID="technique-detail-scroll">
-        <Text style={styles.techniqueName}>{technique.name}</Text>
+        <Text style={styles.techniqueName}>{item.title}</Text>
 
-        <View style={styles.videoSection}>
-          {technique.video_url ? (
-            <TouchableOpacity
-              style={styles.videoPlayer}
-              onPress={handleVideoPress}
-              activeOpacity={0.8}
-              testID="video-button">
-              <Text style={styles.playIcon}>&#9654;</Text>
-              <Text style={styles.videoLabel}>Play Video</Text>
-            </TouchableOpacity>
+        <View style={styles.imageSection}>
+          {historicalImageUrl ? (
+            <View style={styles.imagePlaceholder} testID="historical-image">
+              <Text style={styles.placeholderIcon}>&#128247;</Text>
+              <Text style={styles.placeholderText}>{historicalImageUrl}</Text>
+            </View>
           ) : (
-            <View style={styles.videoPlaceholder} testID="video-placeholder">
+            <View style={styles.imagePlaceholder} testID="image-placeholder">
               <Text style={styles.placeholderIcon}>&#127909;</Text>
               <Text style={styles.placeholderText}>
-                No video available yet
+                No image available yet
               </Text>
             </View>
           )}
@@ -85,13 +73,15 @@ const TechniqueDetailScreen: React.FC = () => {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Description</Text>
-          <Text style={styles.sectionText}>{technique.description}</Text>
+          <Text style={styles.sectionText}>{item.description}</Text>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Instructions</Text>
-          <Text style={styles.sectionText}>{technique.instructions}</Text>
-        </View>
+        {instructions ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Instructions</Text>
+            <Text style={styles.sectionText}>{instructions}</Text>
+          </View>
+        ) : null}
       </ScrollView>
     </SafeAreaView>
   );
@@ -150,28 +140,10 @@ const styles = StyleSheet.create({
     color: '#1a1a2e',
     marginBottom: 20,
   },
-  videoSection: {
+  imageSection: {
     marginBottom: 24,
   },
-  videoPlayer: {
-    width: '100%',
-    height: 200,
-    borderRadius: 16,
-    backgroundColor: '#1a1a2e',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  playIcon: {
-    fontSize: 48,
-    color: '#fff',
-    marginBottom: 8,
-  },
-  videoLabel: {
-    fontSize: 16,
-    color: 'rgba(255,255,255,0.8)',
-    fontWeight: '600',
-  },
-  videoPlaceholder: {
+  imagePlaceholder: {
     width: '100%',
     height: 200,
     borderRadius: 16,
@@ -190,6 +162,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#999',
     fontWeight: '500',
+    textAlign: 'center',
+    paddingHorizontal: 16,
   },
   section: {
     backgroundColor: '#fff',

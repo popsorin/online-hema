@@ -8,13 +8,13 @@ const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({navigate: mockNavigate, goBack: mockGoBack}),
   useRoute: () => ({
-    params: {bookId: 1, bookTitle: 'Fior di Battaglia'},
+    params: {resourceId: 1, resourceTitle: 'Fior di Battaglia'},
   }),
 }));
 
-const mockGetChapters = jest.fn();
+const mockGetSections = jest.fn();
 jest.mock('@/api/content', () => ({
-  getChapters: (...args: unknown[]) => mockGetChapters(...args),
+  getSections: (...args: unknown[]) => mockGetSections(...args),
 }));
 
 function createWrapper() {
@@ -33,8 +33,8 @@ describe('ChaptersScreen', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the book title in the header', async () => {
-    mockGetChapters.mockResolvedValue([]);
+  it('renders the resource title in the header', async () => {
+    mockGetSections.mockResolvedValue([]);
 
     const {getByText} = render(<ChaptersScreen />, {
       wrapper: createWrapper(),
@@ -44,25 +44,23 @@ describe('ChaptersScreen', () => {
     expect(getByText('Chapters')).toBeTruthy();
   });
 
-  it('renders chapter list', async () => {
-    mockGetChapters.mockResolvedValue([
+  it('renders section list', async () => {
+    mockGetSections.mockResolvedValue([
       {
         id: 1,
-        fighting_book_id: 1,
-        chapter_number: 1,
+        resource_id: 1,
+        kind: 'chapter',
+        position: 1,
         title: 'Wrestling',
         description: 'Techniques for unarmed combat and grappling',
-        created_at: '2026-01-18T10:00:00Z',
-        updated_at: '2026-01-18T10:00:00Z',
       },
       {
         id: 2,
-        fighting_book_id: 1,
-        chapter_number: 2,
+        resource_id: 1,
+        kind: 'chapter',
+        position: 2,
         title: 'Dagger Combat',
         description: 'Fighting with the dagger in various situations',
-        created_at: '2026-01-18T10:00:00Z',
-        updated_at: '2026-01-18T10:00:00Z',
       },
     ]);
 
@@ -76,16 +74,15 @@ describe('ChaptersScreen', () => {
     expect(getByText('Dagger Combat')).toBeTruthy();
   });
 
-  it('navigates to Techniques when a chapter is pressed', async () => {
-    mockGetChapters.mockResolvedValue([
+  it('navigates to Techniques when a section is pressed', async () => {
+    mockGetSections.mockResolvedValue([
       {
         id: 3,
-        fighting_book_id: 1,
-        chapter_number: 3,
+        resource_id: 1,
+        kind: 'chapter',
+        position: 3,
         title: 'Longsword',
         description: 'The art of fighting with the longsword',
-        created_at: '2026-01-18T10:00:00Z',
-        updated_at: '2026-01-18T10:00:00Z',
       },
     ]);
 
@@ -99,13 +96,13 @@ describe('ChaptersScreen', () => {
 
     fireEvent.press(getByTestId('chapter-button-3'));
     expect(mockNavigate).toHaveBeenCalledWith('Techniques', {
-      chapterId: 3,
-      chapterTitle: 'Longsword',
+      sectionId: 3,
+      sectionTitle: 'Longsword',
     });
   });
 
   it('navigates back when back button is pressed', async () => {
-    mockGetChapters.mockResolvedValue([]);
+    mockGetSections.mockResolvedValue([]);
 
     const {getByTestId} = render(<ChaptersScreen />, {
       wrapper: createWrapper(),
@@ -115,15 +112,15 @@ describe('ChaptersScreen', () => {
     expect(mockGoBack).toHaveBeenCalled();
   });
 
-  it('shows empty message when no chapters', async () => {
-    mockGetChapters.mockResolvedValue([]);
+  it('shows empty message when no sections', async () => {
+    mockGetSections.mockResolvedValue([]);
 
     const {getByText} = render(<ChaptersScreen />, {
       wrapper: createWrapper(),
     });
 
     await waitFor(() => {
-      expect(getByText('No chapters available yet.')).toBeTruthy();
+      expect(getByText('No sections available yet.')).toBeTruthy();
     });
   });
 });

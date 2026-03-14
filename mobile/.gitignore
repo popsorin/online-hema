@@ -71,3 +71,6 @@ dist/
 
 # Testing
 __snapshots__/
+
+# Expo (leftover from initial scaffolding, project uses bare React Native)
+.expo/

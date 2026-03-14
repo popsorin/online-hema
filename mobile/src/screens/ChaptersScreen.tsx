@@ -1,8 +1,8 @@
 /**
  * Chapters Screen
  *
- * Displays a list of chapters for a fighting book.
- * Each chapter is a clickable button that navigates to the techniques list.
+ * Displays a list of sections for a resource.
+ * Each section is a clickable button that navigates to the items list.
  */
 
 import React, {useCallback} from 'react';
@@ -20,8 +20,8 @@ import {useQuery} from '@tanstack/react-query';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RouteProp} from '@react-navigation/native';
-import {getChapters} from '@/api/content';
-import type {Chapter} from '@/types/api';
+import {getSections} from '@/api/content';
+import type {Section} from '@/types/api';
 import type {MainStackParamList} from '@/navigation/types';
 
 type NavigationProp = NativeStackNavigationProp<MainStackParamList, 'Chapters'>;
@@ -30,32 +30,32 @@ type ChaptersRouteProp = RouteProp<MainStackParamList, 'Chapters'>;
 const ChaptersScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<ChaptersRouteProp>();
-  const {bookId, bookTitle} = route.params;
+  const {resourceId, resourceTitle} = route.params;
 
-  const {data: chapters, isLoading, isError, error, refetch, isRefetching} = useQuery({
-    queryKey: ['chapters', bookId],
-    queryFn: () => getChapters(bookId),
+  const {data: sections, isLoading, isError, error, refetch, isRefetching} = useQuery({
+    queryKey: ['sections', resourceId],
+    queryFn: () => getSections(resourceId),
   });
 
-  const handleChapterPress = useCallback(
-    (chapter: Chapter) => {
+  const handleSectionPress = useCallback(
+    (section: Section) => {
       navigation.navigate('Techniques', {
-        chapterId: chapter.id,
-        chapterTitle: chapter.title,
+        sectionId: section.id,
+        sectionTitle: section.title,
       });
     },
     [navigation],
   );
 
-  const renderChapter = useCallback(
-    ({item}: {item: Chapter}) => (
+  const renderSection = useCallback(
+    ({item}: {item: Section}) => (
       <TouchableOpacity
         style={styles.chapterButton}
-        onPress={() => handleChapterPress(item)}
+        onPress={() => handleSectionPress(item)}
         activeOpacity={0.7}
         testID={`chapter-button-${item.id}`}>
         <View style={styles.chapterNumber}>
-          <Text style={styles.chapterNumberText}>{item.chapter_number}</Text>
+          <Text style={styles.chapterNumberText}>{item.position}</Text>
         </View>
         <View style={styles.chapterInfo}>
           <Text style={styles.chapterTitle}>{item.title}</Text>
@@ -66,7 +66,7 @@ const ChaptersScreen: React.FC = () => {
         <Text style={styles.chevron}>&#8250;</Text>
       </TouchableOpacity>
     ),
-    [handleChapterPress],
+    [handleSectionPress],
   );
 
   const renderEmpty = useCallback(() => {
@@ -75,7 +75,7 @@ const ChaptersScreen: React.FC = () => {
     }
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No chapters available yet.</Text>
+        <Text style={styles.emptyText}>No sections available yet.</Text>
       </View>
     );
   }, [isLoading]);
@@ -91,7 +91,7 @@ const ChaptersScreen: React.FC = () => {
         </TouchableOpacity>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle} numberOfLines={1}>
-            {bookTitle}
+            {resourceTitle}
           </Text>
           <Text style={styles.headerSubtitle}>Chapters</Text>
         </View>
@@ -115,8 +115,8 @@ const ChaptersScreen: React.FC = () => {
         </View>
       ) : (
         <FlatList
-          data={chapters}
-          renderItem={renderChapter}
+          data={sections}
+          renderItem={renderSection}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmpty}

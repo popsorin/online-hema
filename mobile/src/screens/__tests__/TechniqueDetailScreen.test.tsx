@@ -1,22 +1,21 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import {Linking} from 'react-native';
 import TechniqueDetailScreen from '../TechniqueDetailScreen';
 
 const mockGoBack = jest.fn();
 const mockRouteParams = {
-  technique: {
+  item: {
     id: 1,
-    chapter_id: 3,
-    name: 'Posta di Donna',
+    section_id: 3,
+    kind: 'technique',
+    title: 'Posta di Donna',
     description: "The Woman's Guard - a high guard position",
-    instructions:
-      'Hold the sword with the hilt near your right shoulder, point aimed at the opponent\'s face',
-    video_url: null as string | null,
-    thumbnail_url: null,
-    order_in_chapter: 1,
-    created_at: '2026-01-18T10:00:00Z',
-    updated_at: '2026-01-18T10:00:00Z',
+    position: 1,
+    attributes: {
+      instructions:
+        "Hold the sword with the hilt near your right shoulder, point aimed at the opponent's face",
+      historical_image_url: '',
+    } as Record<string, string> | undefined,
   },
 };
 
@@ -28,7 +27,11 @@ jest.mock('@react-navigation/native', () => ({
 describe('TechniqueDetailScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockRouteParams.technique.video_url = null;
+    mockRouteParams.item.attributes = {
+      instructions:
+        "Hold the sword with the hilt near your right shoulder, point aimed at the opponent's face",
+      historical_image_url: '',
+    };
   });
 
   it('renders technique name', () => {
@@ -57,30 +60,24 @@ describe('TechniqueDetailScreen', () => {
     ).toBeTruthy();
   });
 
-  it('shows video placeholder when no video_url', () => {
+  it('shows image placeholder when no historical_image_url', () => {
+    mockRouteParams.item.attributes = undefined;
+
     const {getByTestId} = render(<TechniqueDetailScreen />);
 
-    expect(getByTestId('video-placeholder')).toBeTruthy();
+    expect(getByTestId('image-placeholder')).toBeTruthy();
   });
 
-  it('shows play button when video_url exists', () => {
-    mockRouteParams.technique.video_url = 'https://example.com/video.mp4';
+  it('shows historical image when historical_image_url exists', () => {
+    mockRouteParams.item.attributes = {
+      instructions: 'Some instructions',
+      historical_image_url:
+        '/assets/books/fior-di-battaglia/techniques/posta-di-donna/historical.jpg',
+    };
 
     const {getByTestId} = render(<TechniqueDetailScreen />);
 
-    expect(getByTestId('video-button')).toBeTruthy();
-  });
-
-  it('opens video URL when play button pressed', () => {
-    mockRouteParams.technique.video_url = 'https://example.com/video.mp4';
-    jest.spyOn(Linking, 'openURL').mockResolvedValue(undefined as never);
-
-    const {getByTestId} = render(<TechniqueDetailScreen />);
-
-    fireEvent.press(getByTestId('video-button'));
-    expect(Linking.openURL).toHaveBeenCalledWith(
-      'https://example.com/video.mp4',
-    );
+    expect(getByTestId('historical-image')).toBeTruthy();
   });
 
   it('navigates back when back button is pressed', () => {

@@ -8,9 +8,9 @@ jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({navigate: mockNavigate}),
 }));
 
-const mockGetFightingBooks = jest.fn();
+const mockGetResources = jest.fn();
 jest.mock('@/api/content', () => ({
-  getFightingBooks: (...args: unknown[]) => mockGetFightingBooks(...args),
+  getResources: (...args: unknown[]) => mockGetResources(...args),
 }));
 
 function createWrapper() {
@@ -30,7 +30,7 @@ describe('HomeScreen', () => {
   });
 
   it('renders the header title', async () => {
-    mockGetFightingBooks.mockResolvedValue({
+    mockGetResources.mockResolvedValue({
       data: [],
       page: 1,
       page_size: 20,
@@ -43,19 +43,17 @@ describe('HomeScreen', () => {
     expect(getByText('HEMA Lessons')).toBeTruthy();
   });
 
-  it('renders fighting book cards', async () => {
-    mockGetFightingBooks.mockResolvedValue({
+  it('renders resource cards', async () => {
+    mockGetResources.mockResolvedValue({
       data: [
         {
           id: 1,
-          sword_master_id: 2,
+          author_id: 2,
           title: 'Fior di Battaglia',
           description: 'A combat manual',
           publication_year: 1409,
-          cover_image_url: null,
-          created_at: '2026-01-18T10:00:00Z',
-          updated_at: '2026-01-18T10:00:00Z',
-          sword_master_name: 'Fiore dei Liberi',
+          cover_image_url: undefined,
+          author_name: 'Fiore dei Liberi',
         },
       ],
       page: 1,
@@ -73,19 +71,17 @@ describe('HomeScreen', () => {
     expect(getByText('1409')).toBeTruthy();
   });
 
-  it('navigates to Chapters when a book card is pressed', async () => {
-    mockGetFightingBooks.mockResolvedValue({
+  it('navigates to Chapters when a resource card is pressed', async () => {
+    mockGetResources.mockResolvedValue({
       data: [
         {
           id: 1,
-          sword_master_id: 2,
+          author_id: 2,
           title: 'Fior di Battaglia',
           description: 'A combat manual',
           publication_year: 1409,
-          cover_image_url: null,
-          created_at: '2026-01-18T10:00:00Z',
-          updated_at: '2026-01-18T10:00:00Z',
-          sword_master_name: 'Fiore dei Liberi',
+          cover_image_url: undefined,
+          author_name: 'Fiore dei Liberi',
         },
       ],
       page: 1,
@@ -102,13 +98,13 @@ describe('HomeScreen', () => {
 
     fireEvent.press(getByTestId('book-card-1'));
     expect(mockNavigate).toHaveBeenCalledWith('Chapters', {
-      bookId: 1,
-      bookTitle: 'Fior di Battaglia',
+      resourceId: 1,
+      resourceTitle: 'Fior di Battaglia',
     });
   });
 
-  it('shows empty message when no books', async () => {
-    mockGetFightingBooks.mockResolvedValue({
+  it('shows empty message when no resources', async () => {
+    mockGetResources.mockResolvedValue({
       data: [],
       page: 1,
       page_size: 20,
@@ -119,7 +115,7 @@ describe('HomeScreen', () => {
     const {getByText} = render(<HomeScreen />, {wrapper: createWrapper()});
 
     await waitFor(() => {
-      expect(getByText('No fighting books available yet.')).toBeTruthy();
+      expect(getByText('No resources available yet.')).toBeTruthy();
     });
   });
 });

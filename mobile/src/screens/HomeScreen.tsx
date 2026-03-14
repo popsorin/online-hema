@@ -1,7 +1,7 @@
 /**
  * Home Screen
  *
- * Displays a paginated grid of fighting books (e-commerce style).
+ * Displays a paginated grid of resources (e-commerce style).
  * Publicly accessible without authentication.
  */
 
@@ -20,8 +20,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {useNavigation} from '@react-navigation/native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {getFightingBooks} from '@/api/content';
-import type {FightingBook} from '@/types/api';
+import {getResources} from '@/api/content';
+import type {Resource} from '@/types/api';
 import type {MainStackParamList} from '@/navigation/types';
 
 type NavigationProp = NativeStackNavigationProp<MainStackParamList, 'Home'>;
@@ -48,9 +48,9 @@ const HomeScreen: React.FC = () => {
     refetch,
     isRefetching,
   } = useInfiniteQuery({
-    queryKey: ['fightingBooks'],
+    queryKey: ['resources'],
     queryFn: ({pageParam = 1}) =>
-      getFightingBooks({page: pageParam, page_size: PAGE_SIZE}),
+      getResources({page: pageParam, page_size: PAGE_SIZE}),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total_pages) {
         return lastPage.page + 1;
@@ -60,13 +60,13 @@ const HomeScreen: React.FC = () => {
     initialPageParam: 1,
   });
 
-  const books = data?.pages.flatMap((page) => page.data) ?? [];
+  const resources = data?.pages.flatMap((page) => page.data) ?? [];
 
-  const handleBookPress = useCallback(
-    (book: FightingBook) => {
+  const handleResourcePress = useCallback(
+    (resource: Resource) => {
       navigation.navigate('Chapters', {
-        bookId: book.id,
-        bookTitle: book.title,
+        resourceId: resource.id,
+        resourceTitle: resource.title,
       });
     },
     [navigation],
@@ -78,11 +78,11 @@ const HomeScreen: React.FC = () => {
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const renderBookCard = useCallback(
-    ({item}: {item: FightingBook}) => (
+  const renderResourceCard = useCallback(
+    ({item}: {item: Resource}) => (
       <TouchableOpacity
         style={styles.bookCard}
-        onPress={() => handleBookPress(item)}
+        onPress={() => handleResourcePress(item)}
         activeOpacity={0.7}
         testID={`book-card-${item.id}`}>
         <View style={styles.coverPlaceholder}>
@@ -93,7 +93,7 @@ const HomeScreen: React.FC = () => {
             {item.title}
           </Text>
           <Text style={styles.bookAuthor} numberOfLines={1}>
-            {item.sword_master_name}
+            {item.author_name}
           </Text>
           {item.publication_year ? (
             <Text style={styles.bookYear}>{item.publication_year}</Text>
@@ -101,7 +101,7 @@ const HomeScreen: React.FC = () => {
         </View>
       </TouchableOpacity>
     ),
-    [handleBookPress],
+    [handleResourcePress],
   );
 
   const renderFooter = useCallback(() => {
@@ -121,7 +121,7 @@ const HomeScreen: React.FC = () => {
     }
     return (
       <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>No fighting books available yet.</Text>
+        <Text style={styles.emptyText}>No resources available yet.</Text>
       </View>
     );
   }, [isLoading]);
@@ -144,7 +144,7 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.errorText}>
             {error instanceof Error
               ? error.message
-              : 'Failed to load fighting books'}
+              : 'Failed to load resources'}
           </Text>
           <TouchableOpacity style={styles.retryButton} onPress={() => refetch()}>
             <Text style={styles.retryText}>Retry</Text>
@@ -152,8 +152,8 @@ const HomeScreen: React.FC = () => {
         </View>
       ) : (
         <FlatList
-          data={books}
-          renderItem={renderBookCard}
+          data={resources}
+          renderItem={renderResourceCard}
           keyExtractor={(item) => item.id.toString()}
           numColumns={COLUMN_COUNT}
           contentContainerStyle={styles.listContent}
