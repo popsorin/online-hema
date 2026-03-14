@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -15,6 +16,20 @@ import (
 	"hema-lessons/internal/middleware"
 	"hema-lessons/internal/store"
 )
+
+// #region agent log
+func debugLog(location, message, hypothesisID string, data map[string]interface{}) {
+	f, err := os.OpenFile("/var/www/hema-lessons/.cursor/debug.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return
+	}
+	defer f.Close()
+	d, _ := json.Marshal(data)
+	fmt.Fprintf(f, `{"timestamp":%d,"location":%q,"message":%q,"hypothesisId":%q,"data":%s}`+"\n",
+		time.Now().UnixMilli(), location, message, hypothesisID, string(d))
+}
+
+// #endregion
 
 type healthResponse struct {
 	Status    string `json:"status"`
@@ -60,53 +75,98 @@ func main() {
 
 	dataStore, err := store.New()
 	if err != nil {
+		// #region agent log
+		debugLog("main.go:store.New", "store load FAILED", "H-B", map[string]interface{}{"error": err.Error()})
+		// #endregion
 		slog.Error("failed to load data store", "error", err)
 		os.Exit(1)
 	}
+	// #region agent log
+	debugLog("main.go:store.New", "store loaded OK - new binary is running", "H-A", map[string]interface{}{"built": "post-rename"})
+	// #endregion
 	slog.Info("data store loaded")
 
-	fightingBookHandler := handlers.NewFightingBookHandler(dataStore)
-	chapterHandler := handlers.NewChapterHandler(dataStore)
-	techniqueHandler := handlers.NewTechniqueHandler(dataStore)
+	resourceHandler := handlers.NewResourceHandler(dataStore)
+	sectionHandler := handlers.NewSectionHandler(dataStore)
+	itemHandler := handlers.NewItemHandler(dataStore)
 
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		path := r.URL.Path
 
+		// #region agent log
+		debugLog("main.go:router", "incoming request", "H-D", map[string]interface{}{"method": r.Method, "path": path})
+		// #endregion
+
+		if strings.HasPrefix(path, "/assets/") {
+			http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))).ServeHTTP(w, r)
+			return
+		}
+
 		if path == "/healthz" {
 			healthzHandler(cfg)(w, r)
 			return
 		}
 
-		if strings.HasPrefix(path, "/api/fighting-books") {
-			if path == "/api/fighting-books" || path == "/api/fighting-books/" {
+		// GET /api/resources
+		if path == "/api/resources" || path == "/api/resources/" {
+			if r.Method == http.MethodGet {
+				resourceHandler.List(w, r)
+				return
+			}
+		}
+
+		if strings.HasPrefix(path, "/api/resources/") {
+			remaining := path[len("/api/resources/"):]
+			parts := strings.SplitN(remaining, "/", 2)
+
+			if len(parts) == 1 {
+				// GET /api/resources/:id
 				if r.Method == http.MethodGet {
-					fightingBookHandler.List(w, r)
+					resourceHandler.Get(w, r)
 					return
 				}
-			} else if strings.HasPrefix(path, "/api/fighting-books/") && path != "/api/fighting-books/" {
-				if strings.HasSuffix(path, "/chapters") {
+			} else if len(parts) == 2 && parts[1] == "sections" {
+				// GET /api/resources/:id/sections
+				if r.Method == http.MethodGet {
+					sectionHandler.ListByBook(w, r)
+					return
+				}
+			}
+		}
+
+		if strings.HasPrefix(path, "/api/sections/") {
+			remaining := path[len("/api/sections/"):]
+			parts := strings.SplitN(remaining, "/", 2)
+
+			if len(parts) == 1 {
+				// GET /api/sections/:id
+				if r.Method == http.MethodGet {
+					sectionHandler.Get(w, r)
+					return
+				}
+			} else if len(parts) == 2 {
+				switch parts[1] {
+				case "sections":
+					// GET /api/sections/:id/sections
 					if r.Method == http.MethodGet {
-						chapterHandler.ListByFightingBook(w, r)
+						sectionHandler.ListChildren(w, r)
 						return
 					}
-				} else if r.Method == http.MethodGet {
-					fightingBookHandler.Get(w, r)
-					return
+				case "items":
+					// GET /api/sections/:id/items
+					if r.Method == http.MethodGet {
+						itemHandler.ListBySection(w, r)
+						return
+					}
 				}
 			}
 		}
 
-		if strings.HasPrefix(path, "/api/chapters/") {
-			if strings.HasSuffix(path, "/techniques") {
-				if r.Method == http.MethodGet {
-					techniqueHandler.ListByChapter(w, r)
-					return
-				}
-			}
-		}
-
+		// #region agent log
+		debugLog("main.go:notfound", "request fell through to 404", "H-D", map[string]interface{}{"path": path, "method": r.Method})
+		// #endregion
 		http.NotFound(w, r)
 	})
 

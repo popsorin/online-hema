@@ -13,35 +13,35 @@ import (
 //go:embed data
 var dataFS embed.FS
 
-// FightingBookWithMaster combines a FightingBook with its SwordMaster's name.
-type FightingBookWithMaster struct {
-	models.FightingBook
-	SwordMasterName string `json:"sword_master_name"`
+// ResourceWithAuthor combines a Resource with its Author's name.
+type ResourceWithAuthor struct {
+	models.Resource
+	AuthorName string `json:"author_name,omitempty"`
 }
 
 // Store holds all application data in memory, loaded from embedded JSON files.
 type Store struct {
-	swordMasters map[int]models.SwordMaster
-	fightingBooks map[int]models.FightingBook
-	chapters      map[int]models.Chapter
-	techniques    map[int]models.Technique
+	authors   map[int]models.Author
+	resources map[int]models.Resource
+	sections  map[int]models.Section
+	items     map[int]models.Item
 }
 
 // New creates a Store by parsing the embedded JSON data files.
 func New() (*Store, error) {
 	s := &Store{}
 
-	if err := s.loadSwordMasters(); err != nil {
-		return nil, fmt.Errorf("loading sword masters: %w", err)
+	if err := s.loadAuthors(); err != nil {
+		return nil, fmt.Errorf("loading authors: %w", err)
 	}
-	if err := s.loadFightingBooks(); err != nil {
-		return nil, fmt.Errorf("loading fighting books: %w", err)
+	if err := s.loadResources(); err != nil {
+		return nil, fmt.Errorf("loading resources: %w", err)
 	}
-	if err := s.loadChapters(); err != nil {
-		return nil, fmt.Errorf("loading chapters: %w", err)
+	if err := s.loadSections(); err != nil {
+		return nil, fmt.Errorf("loading sections: %w", err)
 	}
-	if err := s.loadTechniques(); err != nil {
-		return nil, fmt.Errorf("loading techniques: %w", err)
+	if err := s.loadItems(); err != nil {
+		return nil, fmt.Errorf("loading items: %w", err)
 	}
 
 	return s, nil
@@ -49,59 +49,58 @@ func New() (*Store, error) {
 
 // NewFromData creates a Store from pre-built data (useful for testing).
 func NewFromData(
-	swordMasters []models.SwordMaster,
-	fightingBooks []models.FightingBook,
-	chapters []models.Chapter,
-	techniques []models.Technique,
+	authors []models.Author,
+	resources []models.Resource,
+	sections []models.Section,
+	items []models.Item,
 ) *Store {
 	s := &Store{
-		swordMasters:  make(map[int]models.SwordMaster, len(swordMasters)),
-		fightingBooks: make(map[int]models.FightingBook, len(fightingBooks)),
-		chapters:      make(map[int]models.Chapter, len(chapters)),
-		techniques:    make(map[int]models.Technique, len(techniques)),
+		authors:   make(map[int]models.Author, len(authors)),
+		resources: make(map[int]models.Resource, len(resources)),
+		sections:  make(map[int]models.Section, len(sections)),
+		items:     make(map[int]models.Item, len(items)),
 	}
 
-	for _, m := range swordMasters {
-		s.swordMasters[m.ID] = m
+	for _, a := range authors {
+		s.authors[a.ID] = a
 	}
-	for _, b := range fightingBooks {
-		s.fightingBooks[b.ID] = b
+	for _, r := range resources {
+		s.resources[r.ID] = r
 	}
-	for _, c := range chapters {
-		s.chapters[c.ID] = c
+	for _, sec := range sections {
+		s.sections[sec.ID] = sec
 	}
-	for _, t := range techniques {
-		s.techniques[t.ID] = t
+	for _, i := range items {
+		s.items[i.ID] = i
 	}
 
 	return s
 }
 
-// --- Fighting Books ---
+// --- Resources ---
 
-// ListFightingBooks returns a paginated list of fighting books with their sword master names, ordered by title.
-func (s *Store) ListFightingBooks(params pagination.Params) ([]FightingBookWithMaster, int) {
-	totalCount := len(s.fightingBooks)
+// ListResources returns a paginated list of resources with their author names, ordered by title.
+func (s *Store) ListResources(params pagination.Params) ([]ResourceWithAuthor, int) {
+	totalCount := len(s.resources)
 	if totalCount == 0 {
 		return nil, 0
 	}
 
-	// Collect all books into a slice
-	books := make([]FightingBookWithMaster, 0, totalCount)
-	for _, fb := range s.fightingBooks {
-		master := s.swordMasters[fb.SwordMasterID]
-		books = append(books, FightingBookWithMaster{
-			FightingBook:    fb,
-			SwordMasterName: master.Name,
-		})
+	resources := make([]ResourceWithAuthor, 0, totalCount)
+	for _, r := range s.resources {
+		rwa := ResourceWithAuthor{Resource: r}
+		if r.AuthorID != nil {
+			if author, ok := s.authors[*r.AuthorID]; ok {
+				rwa.AuthorName = author.Name
+			}
+		}
+		resources = append(resources, rwa)
 	}
 
-	// Sort by title ASC
-	sort.Slice(books, func(i, j int) bool {
-		return books[i].Title < books[j].Title
+	sort.Slice(resources, func(i, j int) bool {
+		return resources[i].Title < resources[j].Title
 	})
 
-	// Apply pagination
 	start := params.Offset
 	if start > totalCount {
 		start = totalCount
@@ -111,7 +110,7 @@ func (s *Store) ListFightingBooks(params pagination.Params) ([]FightingBookWithM
 		end = totalCount
 	}
 
-	page := books[start:end]
+	page := resources[start:end]
 	if len(page) == 0 {
 		return nil, totalCount
 	}
@@ -119,114 +118,135 @@ func (s *Store) ListFightingBooks(params pagination.Params) ([]FightingBookWithM
 	return page, totalCount
 }
 
-// GetFightingBookByID returns a single fighting book with its sword master name, or nil if not found.
-func (s *Store) GetFightingBookByID(id int) *FightingBookWithMaster {
-	fb, ok := s.fightingBooks[id]
+// GetResourceByID returns a single resource with its author name, or nil if not found.
+func (s *Store) GetResourceByID(id int) *ResourceWithAuthor {
+	r, ok := s.resources[id]
 	if !ok {
 		return nil
 	}
 
-	master := s.swordMasters[fb.SwordMasterID]
-	return &FightingBookWithMaster{
-		FightingBook:    fb,
-		SwordMasterName: master.Name,
+	rwa := &ResourceWithAuthor{Resource: r}
+	if r.AuthorID != nil {
+		if author, ok := s.authors[*r.AuthorID]; ok {
+			rwa.AuthorName = author.Name
+		}
 	}
+	return rwa
 }
 
-// --- Chapters ---
-
-// FightingBookExists returns true if a fighting book with the given ID exists.
-func (s *Store) FightingBookExists(id int) bool {
-	_, ok := s.fightingBooks[id]
+// ResourceExists returns true if a resource with the given ID exists.
+func (s *Store) ResourceExists(id int) bool {
+	_, ok := s.resources[id]
 	return ok
 }
 
-// ListChaptersByBookID returns chapters for a given fighting book, ordered by chapter number.
-func (s *Store) ListChaptersByBookID(fightingBookID int) []models.Chapter {
-	var chapters []models.Chapter
-	for _, c := range s.chapters {
-		if c.FightingBookID == fightingBookID {
-			chapters = append(chapters, c)
+// --- Sections ---
+
+// ListRootSectionsByResourceID returns top-level sections (parent_id is nil) for a given resource, ordered by position.
+func (s *Store) ListRootSectionsByResourceID(resourceID int) []models.Section {
+	var sections []models.Section
+	for _, sec := range s.sections {
+		if sec.ResourceID == resourceID && sec.ParentID == nil {
+			sections = append(sections, sec)
 		}
 	}
 
-	sort.Slice(chapters, func(i, j int) bool {
-		return chapters[i].ChapterNumber < chapters[j].ChapterNumber
+	sort.Slice(sections, func(i, j int) bool {
+		return sections[i].Position < sections[j].Position
 	})
 
-	return chapters
+	return sections
 }
 
-// --- Techniques ---
-
-// ChapterExists returns true if a chapter with the given ID exists.
-func (s *Store) ChapterExists(id int) bool {
-	_, ok := s.chapters[id]
-	return ok
+// GetSectionByID returns a single section, or nil if not found.
+func (s *Store) GetSectionByID(id int) *models.Section {
+	sec, ok := s.sections[id]
+	if !ok {
+		return nil
+	}
+	return &sec
 }
 
-// ListTechniquesByChapterID returns techniques for a given chapter, ordered by order_in_chapter.
-func (s *Store) ListTechniquesByChapterID(chapterID int) []models.Technique {
-	var techniques []models.Technique
-	for _, t := range s.techniques {
-		if t.ChapterID == chapterID {
-			techniques = append(techniques, t)
+// ListChildSections returns direct child sections of a given parent section, ordered by position.
+func (s *Store) ListChildSections(parentID int) []models.Section {
+	var sections []models.Section
+	for _, sec := range s.sections {
+		if sec.ParentID != nil && *sec.ParentID == parentID {
+			sections = append(sections, sec)
 		}
 	}
 
-	sort.Slice(techniques, func(i, j int) bool {
-		return techniques[i].OrderInChapter < techniques[j].OrderInChapter
+	sort.Slice(sections, func(i, j int) bool {
+		return sections[i].Position < sections[j].Position
 	})
 
-	return techniques
+	return sections
+}
+
+// --- Items ---
+
+// ListItemsBySectionID returns items for a given section, ordered by position.
+func (s *Store) ListItemsBySectionID(sectionID int) []models.Item {
+	var items []models.Item
+	for _, item := range s.items {
+		if item.SectionID == sectionID {
+			items = append(items, item)
+		}
+	}
+
+	sort.Slice(items, func(i, j int) bool {
+		return items[i].Position < items[j].Position
+	})
+
+	return items
 }
 
 // --- Data loading ---
 
-func (s *Store) loadSwordMasters() error {
-	var items []models.SwordMaster
-	if err := loadJSON("data/sword_masters.json", &items); err != nil {
+func (s *Store) loadAuthors() error {
+	var items []models.Author
+	if err := loadJSON("data/authors.json", &items); err != nil {
 		return err
 	}
-	s.swordMasters = make(map[int]models.SwordMaster, len(items))
+	s.authors = make(map[int]models.Author, len(items))
 	for _, item := range items {
-		s.swordMasters[item.ID] = item
+		s.authors[item.ID] = item
 	}
 	return nil
 }
 
-func (s *Store) loadFightingBooks() error {
-	var items []models.FightingBook
-	if err := loadJSON("data/fighting_books.json", &items); err != nil {
+func (s *Store) loadResources() error {
+	var items []models.Resource
+	if err := loadJSON("data/resources.json", &items); err != nil {
 		return err
 	}
-	s.fightingBooks = make(map[int]models.FightingBook, len(items))
+	s.resources = make(map[int]models.Resource, len(items))
 	for _, item := range items {
-		s.fightingBooks[item.ID] = item
+		s.resources[item.ID] = item
 	}
 	return nil
 }
 
-func (s *Store) loadChapters() error {
-	var items []models.Chapter
-	if err := loadJSON("data/chapters.json", &items); err != nil {
+func (s *Store) loadSections() error {
+	var items []models.Section
+	if err := loadJSON("data/sections.json", &items); err != nil {
 		return err
 	}
-	s.chapters = make(map[int]models.Chapter, len(items))
+	s.sections = make(map[int]models.Section, len(items))
 	for _, item := range items {
-		s.chapters[item.ID] = item
+		s.sections[item.ID] = item
 	}
 	return nil
 }
 
-func (s *Store) loadTechniques() error {
-	var items []models.Technique
-	if err := loadJSON("data/techniques.json", &items); err != nil {
+func (s *Store) loadItems() error {
+	var items []models.Item
+	if err := loadJSON("data/items.json", &items); err != nil {
 		return err
 	}
-	s.techniques = make(map[int]models.Technique, len(items))
+	s.items = make(map[int]models.Item, len(items))
 	for _, item := range items {
-		s.techniques[item.ID] = item
+		s.items[item.ID] = item
 	}
 	return nil
 }

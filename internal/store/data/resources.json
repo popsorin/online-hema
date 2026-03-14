@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "author_id": 1,
+    "title": "Zettel",
+    "description": "A mnemonic poem describing the core principles of Liechtenauer's fighting system",
+    "publication_year": 1389,
+    "cover_image_url": "/assets/books/zettel/cover/cover.jpg"
+  },
+  {
+    "id": 2,
+    "author_id": 2,
+    "title": "Fior di Battaglia",
+    "description": "The Flower of Battle - a comprehensive medieval combat manual covering armed and unarmed combat",
+    "publication_year": 1409,
+    "cover_image_url": "/assets/books/fior-di-battaglia/cover/cover.jpg"
+  },
+  {
+    "id": 3,
+    "author_id": 3,
+    "title": "Fechtbuch",
+    "description": "A detailed commentary on Liechtenauer's teachings with practical applications",
+    "publication_year": 1440,
+    "cover_image_url": "/assets/books/fechtbuch/cover/cover.jpg"
+  },
+  {
+    "id": 4,
+    "author_id": 4,
+    "title": "De Arte Gladiatoria Dimicandi",
+    "description": "On the Art of Swordsmanship — a comprehensive Italian fighting treatise dedicated to Duke Guidobaldo da Montefeltro of Urbino. Written in verse and prose, it covers longsword, dagger, poleaxe, spear, one-handed sword, armored combat, and grappling, building on the Fiore tradition while introducing original concepts on tempo, measure, and the superiority of the cut over the thrust.",
+    "publication_year": 1482,
+    "cover_image_url": "/assets/books/de-arte-gladiatoria-dimicandi/cover/cover.jpg"
+  }
+]

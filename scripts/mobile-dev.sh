@@ -48,7 +48,7 @@ case "${1:-help}" in
         npx react-native run-android
         ;;
         
-    restart)
+    restart-android)
         log_info "Restarting Android app..."
         adb shell am force-stop com.hemalessons
         sleep 3
